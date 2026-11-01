@@ -1,5 +1,5 @@
 <template>
-	<div class="space-y-1.5">
+	<div class="min-w-0 w-full space-y-1.5">
 		<InputLabel
 			v-if="label"
 			:id="labelId"
@@ -7,9 +7,9 @@
 			:label="label ? __(label) : undefined"
 			:required="required"
 		/>
-		<div class="flex flex-col gap-4 sm:flex-row sm:items-start">
+		<div class="flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start">
 			<div
-				class="relative aspect-[750/422] w-full shrink-0 grid place-items-center overflow-hidden rounded-6 border border-outline-gray-2 bg-surface-gray-2 sm:w-56"
+				class="relative aspect-[750/422] w-full min-w-0 shrink-0 grid place-items-center overflow-hidden rounded-6 border border-outline-gray-2 bg-surface-gray-2 sm:w-44"
 			>
 				<iframe
 					v-if="preview.type === 'youtube'"
@@ -48,11 +48,11 @@
 				</button>
 			</div>
 
-			<div v-if="isUploadedVideo" class="min-w-0 space-y-2 sm:flex-1">
+			<div v-if="isUploadedVideo" class="min-w-0 flex-1 space-y-2">
 				<div class="text-p-sm-medium text-ink-gray-7 truncate">
 					{{ fileName }}
 				</div>
-				<div class="flex items-center gap-2">
+				<div class="flex flex-wrap items-center gap-2">
 					<FileUploader
 						:fileTypes="['video/mp4', 'video/webm', 'video/ogg']"
 						:private="false"
@@ -80,7 +80,7 @@
 						{{ __('Remove') }}
 					</Button>
 				</div>
-				<p class="text-p-sm text-ink-gray-6">
+				<p class="break-words text-p-sm text-ink-gray-6">
 					{{
 						__(
 							'Uploaded video. Students see it on the course page. Remove it to use a YouTube link instead.'
@@ -89,7 +89,7 @@
 				</p>
 			</div>
 
-			<div v-else class="min-w-0 space-y-2 sm:flex-1">
+			<div v-else class="min-w-0 flex-1 space-y-2">
 				<FormControl
 					:id="inputId"
 					type="text"
@@ -112,7 +112,7 @@
 						</Button>
 					</template>
 				</FileUploader>
-				<p class="text-p-sm text-ink-gray-6">
+				<p class="break-words text-p-sm text-ink-gray-6">
 					{{
 						preview.type === 'youtube'
 							? __(

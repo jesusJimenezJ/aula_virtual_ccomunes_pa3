@@ -1,5 +1,5 @@
 <template>
-	<section class="space-y-5 border-t pt-6">
+	<section class="space-y-4 border-t pt-5">
 		<div class="text-base-semibold text-ink-gray-9">
 			{{ __('Resumen del curso') }}
 		</div>
@@ -25,13 +25,13 @@
 					"
 					:editable="true"
 					:fixedMenu="true"
-					minHeight="7rem"
+					minHeight="10rem"
 				/>
 			</div>
 		</div>
 	</section>
 
-	<section class="space-y-5 border-t pt-6">
+	<section class="space-y-4 border-t pt-5">
 		<div>
 			<div class="text-base-semibold text-ink-gray-9">
 				{{ __('Datos para buscadores') }}
@@ -44,7 +44,9 @@
 				}}
 			</div>
 		</div>
-		<FormControl
+		<div class="course-seo-grid">
+  <div class="course-seo-field">
+    <FormControl
 			v-model="meta.description"
 			:label="__('Descripción para buscadores')"
 			type="textarea"
@@ -56,7 +58,9 @@
 			variant="outline"
 			@input="markDirty()"
 		/>
-		<FormControl
+  </div>
+  <div class="course-seo-field">
+    <FormControl
 			v-model="meta.keywords"
 			:label="__('Palabras clave')"
 			type="textarea"
@@ -64,6 +68,8 @@
 			variant="outline"
 			@input="markDirty()"
 		/>
+  </div>
+</div>
 	</section>
 </template>
 
@@ -79,3 +85,32 @@ const doc = computed(() => resource.doc)
 const descriptionId = useId()
 const descriptionLabelId = useId()
 </script>
+
+
+<style scoped>
+.course-seo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 1rem;
+    width: 100%;
+}
+
+.course-seo-field {
+    min-width: 0;
+}
+
+.course-seo-field :deep(textarea) {
+    height: 4rem;
+    min-height: 4rem;
+    max-height: 6rem;
+    resize: vertical;
+}
+
+@media (max-width: 640px) {
+    .course-seo-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.75rem;
+    }
+}
+</style>

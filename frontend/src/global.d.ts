@@ -4,7 +4,7 @@ declare global {
 	function __(
 		text: string,
 		replace?: (string | number)[],
-		context?: string | null
+		context?: string | null,
 	): string
 
 	interface String {
@@ -17,12 +17,12 @@ declare global {
 	}
 }
 
-declare module 'vue' {
+declare module '@vue/runtime-core' {
 	interface ComponentCustomProperties {
 		__: (
 			text: string,
 			replace?: (string | number)[],
-			context?: string | null
+			context?: string | null,
 		) => string
 	}
 }

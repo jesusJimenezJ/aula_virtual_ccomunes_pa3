@@ -1,29 +1,26 @@
-/**
- * The user menu's Theme row. Before this conversion it toggled light/dark only
- * — the tri-state 'system' preference `utils/theme.ts` already supports had no
- * way into the UI. It is now a submenu (Light/Dark/System), matching the
- * pattern frappe-ui's Dropdown docs show for a theme switcher in a user menu
- * (stories/UserMenu.vue) — not the full `ThemeSwitcher` component, which is
- * for a settings panel, not a menu row.
- */
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 
-// Only what this suite controls is replaced; the rest of frappe-ui stays real.
-// SidebarHeader becomes a prop-capturing stub because the assertions are about
-// the menu's own data (which rows exist, what they call), not popover mechanics.
 vi.mock('frappe-ui', async () => {
 	const actual = await vi.importActual<typeof import('frappe-ui')>('frappe-ui')
+
 	return {
 		...actual,
 		call: vi.fn(),
-		createResource: () => ({ data: null, loading: false, submit: vi.fn() }),
-		toast: { success: vi.fn(), error: vi.fn() },
+		createResource: () => ({
+			data: null,
+			loading: false,
+			submit: vi.fn(),
+		}),
+		toast: {
+			success: vi.fn(),
+			error: vi.fn(),
+		},
 		SidebarHeader: {
 			name: 'SidebarHeader',
 			props: ['title', 'subtitle', 'menuItems'],
-			template: `<div><slot name="prefix" /></div>`,
+			template: '<div><slot name="prefix" /></div>',
 		},
 	}
 })
@@ -37,14 +34,20 @@ vi.mock('@/stores/session', () => ({
 }))
 
 vi.mock('@/stores/user', () => ({
-	usersStore: () => ({ userResource: { data: { is_moderator: false } } }),
+	usersStore: () => ({
+		userResource: { data: { is_moderator: false } },
+	}),
 }))
 
 vi.mock('@/stores/settings', () => ({
-	useSettings: () => ({ settings: { data: null } }),
+	useSettings: () => ({
+		settings: { data: null },
+	}),
 }))
 
-vi.mock('@/composables/useSettingsHash', () => ({ pushSettingsHash: vi.fn() }))
+vi.mock('@/composables/useSettingsHash', () => ({
+	pushSettingsHash: vi.fn(),
+}))
 vi.mock('@/utils/openExternal', () => ({ openExternal: vi.fn() }))
 vi.mock('@/utils/dialogs', () => ({ createDialog: vi.fn() }))
 vi.mock('@/components/Icons/LMSLogo.vue', () => ({
@@ -53,68 +56,80 @@ vi.mock('@/components/Icons/LMSLogo.vue', () => ({
 vi.mock('@/components/Settings/Settings.vue', () => ({
 	default: { template: '<div />' },
 }))
-vi.mock('vue-router', () => ({ useRouter: () => ({ push: vi.fn() }) }))
-vi.mock('@/utils', () => ({ convertToTitleCase: (s: string) => s }))
-vi.mock('@/utils/safeUrl', () => ({ safeUrl: (s: string) => s }))
+vi.mock('vue-router', () => ({
+	useRouter: () => ({ push: vi.fn() }),
+}))
+vi.mock('@/utils', () => ({
+	convertToTitleCase: (value: string) => value,
+}))
+vi.mock('@/utils/safeUrl', () => ({
+	safeUrl: (value: string) => value,
+}))
 
-vi.stubGlobal('__', (text: string) => text)
+vi.stubGlobal('__', (value: string) => value)
 
 import UserDropdown from '@/components/Sidebar/UserDropdown.vue'
 import { setThemePreference, themePreference } from '@/utils/theme'
 
 function build() {
 	setActivePinia(createPinia())
-	return mount(UserDropdown, { global: { mocks: { __: (t: string) => t } } })
+	return mount(UserDropdown, {
+		global: { mocks: { __: (value: string) => value } },
+	})
 }
 
-function themeMenu(wrapper: ReturnType<typeof build>) {
-	const options = wrapper
+function getMenuOptions(wrapper: ReturnType<typeof build>) {
+	const menuItems = wrapper
 		.findComponent({ name: 'SidebarHeader' })
-		.props('menuItems')
-	const group = options[0].options as any[]
-	return group.find((option) => option.label === 'Theme')
+		.props('menuItems') as Array<{
+		label?: string
+		options?: Array<{ label?: string }>
+	}>
+
+	return menuItems.flatMap((item) =>
+		item.options ? item.options : [item],
+	)
 }
 
-describe('UserDropdown theme menu', () => {
+describe('UserDropdown: tema bloqueado en claro', () => {
 	beforeEach(() => {
-		setThemePreference('system')
+		setThemePreference('light')
 	})
 
 	afterEach(() => {
-		setThemePreference('system')
-	})
-
-	it('offers Light, Dark and System', () => {
-		const menu = themeMenu(build())
-		expect(menu.submenu.map((item: any) => item.label)).toEqual([
-			'Light',
-			'Dark',
-			'System',
-		])
-	})
-
-	it('marks the current preference selected', () => {
-		setThemePreference('dark')
-		const menu = themeMenu(build())
-		const selected = menu.submenu.filter((item: any) => item.selected)
-		expect(selected.map((item: any) => item.label)).toEqual(['Dark'])
-	})
-
-	it('draws a check beside the selected theme only', () => {
 		setThemePreference('light')
-		const menu = themeMenu(build())
-		const checks = menu.submenu.map((item: any) =>
-			item.slots.suffix({ selected: item.selected })
-		)
-		expect(checks.map(Boolean)).toEqual([true, false, false])
 	})
 
-	it('sets the preference when a theme is picked', () => {
-		const menu = themeMenu(build())
-		menu.submenu.find((item: any) => item.label === 'Light').onClick()
-		expect(themePreference.value).toBe('light')
+	it('no agrega un selector de tema al menú del usuario', () => {
+		const options = getMenuOptions(build())
+		const labels = options.map((option) => option.label)
 
-		menu.submenu.find((item: any) => item.label === 'System').onClick()
-		expect(themePreference.value).toBe('system')
+		expect(labels).not.toContain('Theme')
+		expect(labels).not.toContain('Tema')
+	})
+
+	it('mantiene el tema claro al solicitar la preferencia dark', () => {
+		setThemePreference('dark')
+
+		expect(themePreference.value).toBe('light')
+	})
+
+	it('mantiene el tema claro al solicitar la preferencia system', () => {
+		setThemePreference('system')
+
+		expect(themePreference.value).toBe('light')
+	})
+
+	it('mantiene el menú de usuario disponible sin opciones de tema', () => {
+		const options = getMenuOptions(build())
+		const labels = options
+			.map((option) => option.label)
+			.filter(Boolean)
+
+		expect(labels).toContain('Mi perfil')
+		expect(labels).toContain('Ajustes')
+		expect(labels).toContain('Cerrar sesión')
+		expect(labels).not.toContain('Theme')
+		expect(labels).not.toContain('Tema')
 	})
 })

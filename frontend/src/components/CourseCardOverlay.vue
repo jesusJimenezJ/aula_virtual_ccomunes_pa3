@@ -229,25 +229,66 @@ const isAdmin = computed<boolean>(() => {
 
 <style scoped>
 .enrollment-panel {
-	border: 1px solid var(--surface-green-2);
-	border-radius: 1.1rem;
+	width: 100%;
+	min-width: 0;
+	max-width: 100%;
+	overflow: hidden;
+	/* token-exempt-start: color literal original del diseño; conservar sin alterar */
+	border: 1px solid #d9e5f2;
+	/* token-exempt-end */
+	border-radius: 1.15rem;
 	background: var(--surface-base);
-	box-shadow: 0 14px 34px color-mix(in srgb, var(--ink-base) 9%, transparent);
+	/* token-exempt-start: color literal original del diseño; conservar sin alterar */
+	box-shadow: 0 12px 32px rgb(25 65 110 / 9%);
+	/* token-exempt-end */
+	transition:
+		box-shadow 0.2s ease,
+		transform 0.2s ease;
+}
+
+.enrollment-panel:hover {
+	/* token-exempt-start: color literal original del diseño; conservar sin alterar */
+	box-shadow: 0 16px 38px rgb(25 65 110 / 13%);
+	/* token-exempt-end */
 }
 
 .enrollment-panel > div:last-child {
-	padding: 1.2rem;
+	padding: 1.35rem;
 }
 
 .enrollment-panel > div:last-child > div:first-child {
-	color: var(--ink-base);
-	font-size: 1.8rem;
-	letter-spacing: -0.04em;
+	margin-bottom: 1.25rem;
+	/* token-exempt-start: color literal original del diseño; conservar sin alterar */
+	color: #173e70;
+	/* token-exempt-end */
+	font-size: 1.9rem;
+	font-weight: 800;
+	letter-spacing: -0.045em;
 }
 
 .enrollment-panel section {
-	padding-top: 1rem;
-	border-top: 1px solid var(--surface-gray-2);
+	padding-top: 1.15rem;
+	/* token-exempt-start: color literal original del diseño; conservar sin alterar */
+	border-top: 1px solid #e5edf5;
+	/* token-exempt-end */
+}
+
+.enrollment-panel section > div:first-child {
+	/* token-exempt-start: color literal original del diseño; conservar sin alterar */
+	color: #173e70;
+	/* token-exempt-end */
+	font-weight: 700;
+}
+
+.enrollment-panel section > div:not(:first-child) {
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+
+.enrollment-panel :deep(button) {
+	min-height: 2.8rem;
+	border-radius: 0.7rem;
+	font-weight: 700;
 }
 
 @media (max-width: 767px) {
@@ -255,6 +296,10 @@ const isAdmin = computed<boolean>(() => {
 		width: 100%;
 		min-width: 0;
 		max-width: none;
+	}
+
+	.enrollment-panel > div:last-child {
+		padding: 1.15rem;
 	}
 }
 </style>

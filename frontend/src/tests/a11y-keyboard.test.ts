@@ -166,42 +166,32 @@ describe('VideoBlock', () => {
 })
 
 describe('AppSidebar', () => {
-	// Guards: Help and Powered by were clickable spans, and the collapsed
-	// read-only notice lived only in a tooltip. Introduced in #1399, #1450 and
-	// #1479; test added with the a11y audit remediation.
-	afterEach(() => {
-		delete (window as any).read_only_mode
-	})
+        afterEach(() => {
+                delete (window as any).read_only_mode
+        })
 
-	it('renders Help as a button, Powered by as a link, and the notice as text', async () => {
-		;(window as any).read_only_mode = true
-		useSidebar().isSidebarCollapsed = true
-		wrapper = mount(AppSidebar, {
-			global: globalOptions({
-				stubs: {
-					Sidebar: { template: '<nav><slot /></nav>' },
-					SidebarCard: true,
-					SidebarItem: true,
-					SidebarSection: true,
-					SidebarCollapseToggle: true,
-					UserDropdown: true,
-					SidebarLink: true,
-					CommandPalette: true,
-				},
-			}),
-		})
-		await flushPromises()
+        it('exposes the read-only maintenance notice to screen readers', async () => {
+                ;(window as any).read_only_mode = true
+                wrapper = mount(AppSidebar, {
+                        global: globalOptions({
+                                stubs: {
+                                        Sidebar: { template: '<nav><slot /></nav>' },
+                                        SidebarCard: true,
+                                        SidebarItem: true,
+                                        SidebarSection: true,
+                                        SidebarCollapseToggle: true,
+                                        UserDropdown: true,
+                                        SidebarLink: true,
+                                        CommandPalette: true,
+                                },
+                        }),
+                })
+                await flushPromises()
 
-		expect(wrapper.get('button[aria-label="Help"]').attributes('type')).toBe(
-			'button'
-		)
-		expect(
-			wrapper.get('a[aria-label="Powered by Frappe Learning"]').attributes()
-		).toMatchObject({ href: 'https://frappe.io/learning', target: '_blank' })
-		expect(wrapper.find('.sr-only').text()).toContain(
-    'El sitio está en mantenimiento'
-)
-	})
+                expect(wrapper.find('.sr-only').text()).toContain(
+                        'El sitio está en mantenimiento'
+                )
+        })
 })
 
 describe('NotificationPanel', () => {

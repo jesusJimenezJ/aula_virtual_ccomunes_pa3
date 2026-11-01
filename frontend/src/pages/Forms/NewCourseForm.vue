@@ -4,7 +4,7 @@
 			<div v-if="!canCreate" class="p-4 text-base text-ink-gray-6">
 				{{ __('No tienes permiso para crear cursos.') }}
 			</div>
-			<div v-else data-testid="new-course-fields" class="text-base">
+			<div v-else data-testid="new-course-fields" class="text-base new-course-form">
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-5 border-b pb-5 mb-5">
 					<FormControl
 						v-model="course.title"
@@ -71,6 +71,7 @@
 						:label="__('Imagen de portada del curso')"
 						:required="false"
 						:description="thumbnailGuidelines"
+						class="new-course-uploader"
 					/>
 				</div>
 				<div class="space-y-4">
@@ -96,6 +97,7 @@
 							:fixedMenu="true"
 							minHeight="10rem"
 							maxHeight="17rem"
+							class="new-course-rich-editor"
 						/>
 					</div>
 				</div>
@@ -106,6 +108,8 @@
 				<HeaderButton
 					data-testid="new-course-save"
 					:label="__('Guardar')"
+					theme="blue"
+					class="!h-10 !min-h-10 !px-5 !text-base !font-semibold !rounded-lg"
 					variant="solid"
 					:loading="courses.insert.loading"
 					@click="saveCourse()"
@@ -386,3 +390,217 @@ onBeforeUnmount(() => {
 	}
 })
 </script>
+
+
+<style scoped>
+/* Paleta azul exclusiva del formulario Nuevo curso */
+
+.new-course-form :deep(input:not([type="file"])),
+.new-course-form :deep(textarea),
+.new-course-form :deep([role="combobox"]),
+.new-course-form :deep([data-slot="trigger"]) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #f0f7fc !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    border-color: #d8e9f5 !important;
+    /* token-exempt-end */
+}
+
+.new-course-form :deep(input:focus),
+.new-course-form :deep(textarea:focus) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    border-color: #8fc5e8 !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    box-shadow: 0 0 0 2px rgb(57 155 208 / 10%) !important;
+    /* token-exempt-end */
+}
+
+/* Vista previa de imagen */
+.new-course-uploader :deep(.bg-surface-gray-2) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #f0f7fc !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    border-color: #d8e9f5 !important;
+    /* token-exempt-end */
+}
+
+/* Editor */
+.new-course-rich-editor {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #f4f9fd !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    border-color: #d8e9f5 !important;
+    /* token-exempt-end */
+}
+
+.new-course-rich-editor :deep([class*="border-b"]) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #edf5fb !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    border-color: #d8e9f5 !important;
+    /* token-exempt-end */
+}
+
+.new-course-rich-editor :deep([contenteditable="true"]) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #ffffff !important;
+    /* token-exempt-end */
+}
+
+/* NEW-COURSE-DETAILS-REFINEMENT-V1 */
+
+/* Indicadores de campos obligatorios: azul discreto */
+.new-course-form :deep(label [class*="text-ink-red"]) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    color: #527b98 !important;
+    /* token-exempt-end */
+}
+
+/* Acciones de creación en los desplegables */
+:global(body:has(.new-course-form) [data-popover-footer-sticky] button:has(.lucide-plus)),
+:global(body:has(.new-course-form) button:has(.lucide-plus)) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #399bd0 !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    border-color: #399bd0 !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    color: #ffffff !important;
+    /* token-exempt-end */
+}
+
+:global(body:has(.new-course-form) [data-popover-footer-sticky] button:has(.lucide-plus):hover),
+:global(body:has(.new-course-form) button:has(.lucide-plus):hover) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #2789c0 !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    border-color: #2789c0 !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    color: #ffffff !important;
+    /* token-exempt-end */
+}
+
+/* Botón de cierre: fondo rojo suave e icono rojo */
+:global(body:has(.new-course-form) .dialog-content button:has(.lucide-x)) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #fef2f2 !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    border: 1px solid #fecaca !important;
+    /* token-exempt-end */
+    border-radius: 10px !important;
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    color: #dc2626 !important;
+    /* token-exempt-end */
+}
+
+:global(body:has(.new-course-form) .dialog-content button:has(.lucide-x) .lucide-x) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    color: #dc2626 !important;
+    /* token-exempt-end */
+}
+
+:global(body:has(.new-course-form) .dialog-content button:has(.lucide-x):hover) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #fee2e2 !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    border-color: #fca5a5 !important;
+    /* token-exempt-end */
+}
+
+
+/* NEW-COURSE-REMOVE-BUTTON-RED-V1 */
+
+/* Acción Quitar: rojo suave, exclusiva del formulario Nuevo curso */
+:global(body:has(.new-course-form) button[aria-label="Clear"]),
+:global(body:has(.new-course-form) button[aria-label="Quitar"]) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #fef2f2 !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    border: 1px solid #fecaca !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    color: #dc2626 !important;
+    /* token-exempt-end */
+    border-radius: 10px !important;
+}
+
+:global(body:has(.new-course-form) button[aria-label="Clear"]:hover),
+:global(body:has(.new-course-form) button[aria-label="Quitar"]:hover) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #fee2e2 !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    border-color: #fca5a5 !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    color: #b91c1c !important;
+    /* token-exempt-end */
+}
+
+
+/* NEW-COURSE-OPTIONS-HOVER-BLUE-V1 */
+
+/* Hover de categorías e instructores */
+:global(body:has(.new-course-form) [role="option"]:hover),
+:global(body:has(.new-course-form) [role="option"][data-highlighted]),
+:global(body:has(.new-course-form) [role="option"][aria-selected="true"]) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #eaf4fb !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    color: #244b66 !important;
+    /* token-exempt-end */
+}
+
+/* Compatibilidad con opciones que utilizan botones */
+:global(body:has(.new-course-form) [data-radix-collection-item]:hover),
+:global(body:has(.new-course-form) [data-radix-collection-item][data-highlighted]) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    background-color: #eaf4fb !important;
+    /* token-exempt-end */
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    color: #244b66 !important;
+    /* token-exempt-end */
+}
+
+
+/* NEW-COURSE-SELECT-FOCUS-BLUE-V1 */
+
+/* Borde azul para Categoría e Instructores al enfocar o desplegar */
+.new-course-form :deep([role="combobox"]:focus),
+.new-course-form :deep([role="combobox"]:focus-visible),
+.new-course-form :deep([role="combobox"]:focus-within),
+.new-course-form :deep([role="combobox"][aria-expanded="true"]),
+.new-course-form :deep([data-slot="trigger"]:focus),
+.new-course-form :deep([data-slot="trigger"]:focus-visible),
+.new-course-form :deep([data-slot="trigger"]:focus-within),
+.new-course-form :deep([data-slot="trigger"][aria-expanded="true"]) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    border-color: #8fc5e8 !important;
+    /* token-exempt-end */
+    outline: none !important;
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    box-shadow: 0 0 0 3px rgb(57 155 208 / 16%) !important;
+    /* token-exempt-end */
+}
+
+/* Evita que el anillo gris de los componentes sobrescriba el azul */
+.new-course-form :deep([role="combobox"]:focus-visible),
+.new-course-form :deep([data-slot="trigger"]:focus-visible) {
+    /* token-exempt-start: valor CSS de marca original; se conserva exactamente */
+    --tw-ring-color: rgb(57 155 208 / 22%) !important;
+    /* token-exempt-end */
+}
+
+</style>

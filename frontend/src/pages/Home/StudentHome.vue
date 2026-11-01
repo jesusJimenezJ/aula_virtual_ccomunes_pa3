@@ -1,97 +1,120 @@
+
 <template>
 	<div class="student-home">
-		<!-- Bienvenida -->
-		<section class="student-home__welcome">
-			<div>
-				<span class="student-home__eyebrow">Ccomunes</span>
-				<h2>Tu aprendizaje, en un solo lugar</h2>
-				<p>
-					Retoma tus cursos de Psicología Social Comunitaria y continúa con sus
-					lecciones.
-				</p>
+		<!-- Clases en vivo -->
+		<section
+			v-if="myLiveClasses?.data?.length"
+			class="student-home__section"
+		>
+			<div class="student-home__section-heading">
+				<div>
+					<span class="student-home__section-eyebrow">AGENDA</span>
+					<h2 class="student-home__section-title">
+						Mis próximas clases en vivo
+					</h2>
+				</div>
 			</div>
 
-			<router-link :to="{ name: 'Courses' }" class="student-home__browse">
-				Explorar cursos
-				<span class="lucide-arrow-up-right size-4" aria-hidden="true" />
-			</router-link>
-		</section>
-
-		<!-- Clases en vivo -->
-		<section v-if="myLiveClasses?.data?.length" class="student-home__section">
-			<h2 class="student-home__section-title">Mis próximas clases en vivo</h2>
-
-			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+			<div class="student-home__grid">
 				<article
 					v-for="cls in myLiveClasses.data"
 					:key="cls.name"
-					class="student-home__card"
+					class="student-home__class-card"
 				>
-					<h3 class="student-home__card-title">{{ cls.title }}</h3>
+					<div class="student-home__class-icon">
+						<span class="lucide-video size-5" aria-hidden="true" />
+					</div>
 
-					<p v-if="cls.description" class="student-home__description">
-						{{ cls.description }}
-					</p>
+					<div class="student-home__class-content">
+						<h3 class="student-home__card-title">
+							{{ cls.title }}
+						</h3>
 
-					<div class="student-home__details">
-						<div class="student-home__detail">
-							<span class="lucide-calendar size-4" />
-							<span>{{ dayjs(cls.date).format('DD MMMM YYYY') }}</span>
-						</div>
-
-						<div class="student-home__detail">
-							<span class="lucide-clock size-4" />
-							<span>
-								{{ formatTime(cls.time) }}
-								-
-								{{ dayjs(getClassEnd(cls)).format('HH:mm') }}
-							</span>
-						</div>
-
-						<a
-							v-if="canAccessClass(cls) && cls.join_url"
-							:href="safeUrl(cls.join_url)"
-							v-external
-							class="student-home__join"
+						<p
+							v-if="cls.description"
+							class="student-home__description"
 						>
-							<span class="lucide-video size-4" />
-							Unirme a la clase
-						</a>
+							{{ cls.description }}
+						</p>
 
-						<div v-else-if="hasClassEnded(cls)" class="student-home__ended">
-							<span class="lucide-info size-4" />
-							Esta clase ha finalizado
-						</div>
+						<div class="student-home__details">
+							<div class="student-home__detail">
+								<span class="lucide-calendar size-4" aria-hidden="true" />
+								<span>
+									{{ dayjs(cls.date).format('DD MMMM YYYY') }}
+								</span>
+							</div>
 
-						<div v-else class="student-home__pending">
-							<span class="lucide-clock size-4" />
-							Clase programada
+							<div class="student-home__detail">
+								<span class="lucide-clock size-4" aria-hidden="true" />
+								<span>
+									{{ formatTime(cls.time) }}
+									-
+									{{ dayjs(getClassEnd(cls)).format('HH:mm') }}
+								</span>
+							</div>
 						</div>
+					</div>
+
+					<a
+						v-if="canAccessClass(cls) && cls.join_url"
+						:href="safeUrl(cls.join_url)"
+						v-external
+						class="student-home__join"
+					>
+						<span class="lucide-video size-4" aria-hidden="true" />
+						Unirme a la clase
+					</a>
+
+					<div
+						v-else-if="hasClassEnded(cls)"
+						class="student-home__status student-home__status--ended"
+					>
+						<span class="lucide-info size-4" aria-hidden="true" />
+						Clase finalizada
+					</div>
+
+					<div
+						v-else
+						class="student-home__status student-home__status--pending"
+					>
+						<span class="lucide-clock size-4" aria-hidden="true" />
+						Clase programada
 					</div>
 				</article>
 			</div>
 		</section>
 
-		<!-- Cursos del estudiante -->
-		<section v-if="myCourses.data?.length" class="student-home__section">
-			<div class="flex items-center justify-between mb-3">
-				<h2 class="font-semibold text-md text-ink-gray-9">
-					{{
-						myCourses.data[0].membership
-							? __('Mis cursos')
-							: __('Cursos destacados')
-					}}
-				</h2>
-
-				<router-link :to="{ name: 'Courses' }">
-					<span class="flex items-center gap-x-1 text-ink-gray-6 text-xs">
-						Ver todos
-						<span class="lucide-move-right size-3 rtl:rotate-180" />
+		<!-- Cursos -->
+		<section
+			v-if="myCourses.data?.length"
+			class="student-home__section"
+		>
+			<div class="student-home__section-heading">
+				<div>
+					<span class="student-home__section-eyebrow">
+						FORMACIÓN
 					</span>
+
+					<h2 class="student-home__section-title">
+						{{
+							myCourses.data[0].membership
+								? __('Mis cursos')
+								: __('Cursos destacados')
+						}}
+					</h2>
+				</div>
+
+				<router-link
+					:to="{ name: 'Courses' }"
+					class="student-home__view-all"
+				>
+					Ver todos
+					<span class="lucide-arrow-right size-4" aria-hidden="true" />
 				</router-link>
 			</div>
 
-			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+			<div class="student-home__grid">
 				<CourseCard
 					v-for="course in myCourses.data"
 					:key="course.name"
@@ -104,20 +127,32 @@
 			</div>
 		</section>
 
-		<!-- Grupos del estudiante -->
-		<section v-if="myBatches.data?.length" class="student-home__section">
-			<div class="flex items-center justify-between mb-3">
-				<h2 class="student-home__section-title">Mis próximos grupos</h2>
-
-				<router-link :to="{ name: 'Batches' }">
-					<span class="flex items-center gap-x-1 text-ink-gray-6 text-xs">
-						Ver todos
-						<span class="lucide-move-right size-3 rtl:rotate-180" />
+		<!-- Grupos -->
+		<section
+			v-if="myBatches.data?.length"
+			class="student-home__section"
+		>
+			<div class="student-home__section-heading">
+				<div>
+					<span class="student-home__section-eyebrow">
+						COMUNIDAD
 					</span>
+
+					<h2 class="student-home__section-title">
+						Mis próximos grupos
+					</h2>
+				</div>
+
+				<router-link
+					:to="{ name: 'Batches' }"
+					class="student-home__view-all"
+				>
+					Ver todos
+					<span class="lucide-arrow-right size-4" aria-hidden="true" />
 				</router-link>
 			</div>
 
-			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+			<div class="student-home__grid">
 				<router-link
 					v-for="batch in myBatches.data"
 					:key="batch.name"
@@ -125,6 +160,7 @@
 						name: 'BatchDetail',
 						params: { batchName: batch.name },
 					}"
+					class="student-home__batch-link"
 				>
 					<BatchCard :batch="batch" />
 				</router-link>
@@ -163,7 +199,10 @@ const myBatches = createResource({
 })
 
 function getClassEnd(cls: any) {
-	return dayjs(`${cls.date} ${cls.time}`).add(cls.duration || 0, 'minutes')
+	return dayjs(`${cls.date} ${cls.time}`).add(
+		cls.duration || 0,
+		'minutes'
+	)
 }
 
 function canAccessClass(cls: any) {
@@ -171,7 +210,10 @@ function canAccessClass(cls: any) {
 	const start = dayjs(`${cls.date} ${cls.time}`)
 	const end = getClassEnd(cls)
 
-	return now.isAfter(start.subtract(15, 'minutes')) && now.isBefore(end)
+	return (
+		now.isAfter(start.subtract(15, 'minutes')) &&
+		now.isBefore(end)
+	)
 }
 
 function hasClassEnded(cls: any) {
@@ -181,117 +223,198 @@ function hasClassEnded(cls: any) {
 
 <style scoped>
 .student-home {
-	padding-bottom: 2rem;
+	width: 100%;
+	padding-bottom: 2.5rem;
+	color: var(--ink-blue-9);
 }
 
 .student-home__welcome {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 1.5rem;
-	margin-top: 1.5rem;
-	padding: 1.5rem clamp(1.2rem, 3vw, 2rem);
-	border: 1px solid var(--surface-green-2);
-	border-radius: 1.15rem;
-	background: linear-gradient(
-		110deg,
-		var(--surface-green-1),
-		var(--surface-amber-1)
-	);
+	gap: 2rem;
+	overflow: hidden;
+	margin-top: 0.5rem;
+	padding: clamp(1.5rem, 4vw, 2.5rem);
+	border: 1px solid var(--surface-blue-3);
+	border-radius: 1.25rem;
+	background:
+		radial-gradient(
+			circle at 90% 15%,
+			color-mix(in srgb, white 75%, transparent),
+			transparent 30%
+		),
+		linear-gradient(115deg, var(--surface-blue-2) 0%, var(--surface-blue-2) 60%, var(--surface-base) 100%);
+}
+
+.student-home__welcome-content {
+	position: relative;
+	z-index: 1;
 }
 
 .student-home__eyebrow {
-	color: var(--ink-green-7);
+	display: inline-block;
+	color: var(--ink-blue-5);
 	font-size: 0.72rem;
-	font-weight: 750;
-	letter-spacing: 0.12em;
-	text-transform: uppercase;
+	font-weight: 800;
+	letter-spacing: 0.13em;
 }
 
 .student-home__welcome h2 {
-	margin: 0.4rem 0 0.35rem;
-	color: var(--ink-base);
-	font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-	font-weight: 750;
-	letter-spacing: -0.03em;
+	margin: 0.65rem 0 0.5rem;
+	color: var(--ink-blue-9);
+	font-size: clamp(1.5rem, 3vw, 2.1rem);
+	font-weight: 800;
+	letter-spacing: -0.04em;
+	line-height: 1.2;
 }
 
 .student-home__welcome p {
-	max-width: 42rem;
+	max-width: 38rem;
 	margin: 0;
-	color: var(--ink-gray-7);
-	line-height: 1.55;
+	color: var(--ink-gray-6);
+	font-size: 0.95rem;
+	line-height: 1.65;
 }
 
 .student-home__browse {
 	display: inline-flex;
 	flex-shrink: 0;
 	align-items: center;
-	gap: 0.5rem;
-	padding: 0.75rem 1rem;
-	border-radius: 0.7rem;
-	background: var(--ink-green-7);
+	justify-content: center;
+	gap: 0.6rem;
+	min-height: 2.9rem;
+	padding: 0.8rem 1.2rem;
+	border: 1px solid var(--ink-blue-5);
+	border-radius: 0.75rem;
+	background: var(--ink-blue-5);
 	color: white;
-	font-size: 0.85rem;
+	font-size: 0.875rem;
 	font-weight: 700;
 	text-decoration: none;
+	transition:
+		background 160ms ease,
+		transform 160ms ease,
+		box-shadow 160ms ease;
 }
 
 .student-home__browse:hover {
-	background: var(--ink-green-8);
+	transform: translateY(-2px);
+	background: var(--ink-blue-7);
+	box-shadow: 0 7px 18px color-mix(in srgb, var(--ink-blue-5) 20%, transparent);
 }
 
 .student-home__section {
 	margin-top: 2.5rem;
 }
 
-.student-home__section-title {
-	margin-bottom: 0.85rem;
-	color: var(--ink-gray-8);
-	font-size: 1.1rem;
-	font-weight: 700;
+.student-home__section-heading {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-bottom: 1.1rem;
 }
 
-.student-home__card {
+.student-home__section-eyebrow {
+	display: block;
+	margin-bottom: 0.35rem;
+	color: var(--ink-blue-5);
+	font-size: 0.68rem;
+	font-weight: 800;
+	letter-spacing: 0.12em;
+}
+
+.student-home__section-title {
+	margin: 0;
+	color: var(--ink-blue-9);
+	font-size: clamp(1.1rem, 2vw, 1.3rem);
+	font-weight: 750;
+	letter-spacing: -0.025em;
+}
+
+.student-home__view-all {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	flex-shrink: 0;
+	color: var(--ink-blue-5);
+	font-size: 0.82rem;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.student-home__view-all:hover {
+	color: var(--ink-blue-9);
+}
+
+.student-home__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr));
+	gap: 1.4rem;
+        align-items: stretch;
+}
+
+.student-home__class-card {
 	display: flex;
-	height: 100%;
+	min-width: 0;
 	flex-direction: column;
-	padding: 1rem;
-	border: 1px solid var(--surface-green-2);
-	border-radius: 0.9rem;
+	padding: 1.25rem;
+	border: 1px solid var(--outline-gray-2);
+	border-radius: 1rem;
 	background: var(--surface-base);
-	transition: border-color 160ms ease, box-shadow 160ms ease,
+	box-shadow: 0 3px 14px color-mix(in srgb, var(--ink-blue-9) 3.5%, transparent);
+	transition:
+		border-color 160ms ease,
+		box-shadow 160ms ease,
 		transform 160ms ease;
 }
 
-.student-home__card:hover {
-	border-color: var(--ink-green-4);
-	box-shadow: 0 8px 22px color-mix(in srgb, var(--ink-green-8) 8%, transparent);
-	transform: translateY(-2px);
+.student-home__class-card:hover {
+	transform: translateY(-3px);
+	border-color: var(--surface-blue-3);
+	box-shadow: 0 10px 24px color-mix(in srgb, var(--ink-blue-9) 8%, transparent);
+}
+
+.student-home__class-icon {
+	display: flex;
+	width: 2.65rem;
+	height: 2.65rem;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1rem;
+	border-radius: 0.8rem;
+	background: var(--surface-blue-2);
+	color: var(--ink-blue-5);
+}
+
+.student-home__class-content {
+	flex: 1;
 }
 
 .student-home__card-title {
-	margin: 0 0 0.8rem;
-	color: var(--ink-gray-8);
+	margin: 0 0 0.55rem;
+	color: var(--ink-blue-9);
 	font-size: 1rem;
-	font-weight: 700;
+	font-weight: 750;
 	line-height: 1.4;
 }
 
 .student-home__description {
 	margin: 0 0 1rem;
-	color: var(--ink-gray-7);
-	font-size: 0.9rem;
-	line-height: 1.5;
+	color: var(--ink-gray-6);
+	font-size: 0.85rem;
+	line-height: 1.55;
 }
 
 .student-home__details {
 	display: flex;
 	flex-direction: column;
-	gap: 0.75rem;
-	margin-top: auto;
-	color: var(--ink-gray-7);
-	font-size: 0.875rem;
+	gap: 0.7rem;
+	margin: 1rem 0;
+	color: var(--ink-gray-6);
+	font-size: 0.82rem;
 }
 
 .student-home__detail {
@@ -300,41 +423,102 @@ function hasClassEnded(cls: any) {
 	gap: 0.55rem;
 }
 
+.student-home__detail span:first-child {
+	flex-shrink: 0;
+	color: var(--ink-blue-5);
+}
+
 .student-home__join {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: 0.45rem;
-	padding: 0.6rem 0.8rem;
-	border-radius: 0.55rem;
-	background: var(--ink-green-7);
-	color: var(--surface-base);
-	font-weight: 650;
+	gap: 0.5rem;
+	width: 100%;
+	min-height: 2.6rem;
+	margin-top: auto;
+	padding: 0.65rem 0.8rem;
+	border-radius: 0.65rem;
+	background: var(--ink-blue-5);
+	color: white;
+	font-size: 0.84rem;
+	font-weight: 700;
 	text-decoration: none;
+	transition: background 150ms ease;
 }
 
 .student-home__join:hover {
-	background: var(--ink-green-8);
+	background: var(--ink-blue-7);
 }
 
-.student-home__ended {
+.student-home__status {
 	display: flex;
 	align-items: center;
 	gap: 0.45rem;
-	color: var(--ink-amber-7);
+	margin-top: auto;
+	padding-top: 0.75rem;
+	font-size: 0.8rem;
+	font-weight: 650;
 }
 
-.student-home__pending {
-	display: flex;
-	align-items: center;
-	gap: 0.45rem;
-	color: var(--ink-gray-7);
+.student-home__status--ended {
+	color: var(--ink-gray-4);
+}
+
+.student-home__status--pending {
+	color: var(--ink-blue-5);
+}
+
+.student-home__batch-link {
+	display: block;
+	min-width: 0;
+	text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+	.student-home__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
 }
 
 @media (max-width: 640px) {
 	.student-home__welcome {
 		align-items: flex-start;
 		flex-direction: column;
+		gap: 1.25rem;
+		padding: 1.4rem;
+	}
+
+	.student-home__browse {
+		width: 100%;
+	}
+
+	.student-home__section {
+		margin-top: 2rem;
+	}
+
+	.student-home__grid {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 1rem;
+	}
+
+	.student-home__section-heading {
+		align-items: flex-start;
+	}
+
+	.student-home__section-title {
+		font-size: 1.05rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.student-home__browse,
+	.student-home__class-card {
+		transition: none;
+	}
+
+	.student-home__browse:hover,
+	.student-home__class-card:hover {
+		transform: none;
 	}
 }
 </style>

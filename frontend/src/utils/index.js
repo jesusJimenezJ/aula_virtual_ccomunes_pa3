@@ -526,15 +526,6 @@ const getSidebarItems = (forMobile = false) => {
 					},
 				},
 				{
-					label: 'Buscar',
-					icon: 'Search',
-					action: 'commandPalette',
-					shortcut: 'Mod+K',
-					condition: () => {
-						return !forMobile && userResource?.data
-					},
-				},
-				{
 					label: 'Notificaciones',
 					icon: 'Bell',
 					panel: 'notifications',

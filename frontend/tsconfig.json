@@ -26,7 +26,8 @@
 			"@framework/ui/components/TrialBanner/index": [
 				"./node_modules/@framework/ui/src/components/TrialBanner/index.ts"
 			]
-		}
+		},
+		"allowJs": true
 	},
 	"include": [
 		"src/**/*.ts",
@@ -35,5 +36,9 @@
 		"src/**/*.vue",
 		"src/*.d.ts"
 	],
-	"references": [{ "path": "./tsconfig.node.json" }]
+	"references": [
+		{
+			"path": "./tsconfig.node.json"
+		}
+	]
 }

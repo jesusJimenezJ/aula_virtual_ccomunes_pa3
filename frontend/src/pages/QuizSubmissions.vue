@@ -39,8 +39,7 @@
 
 		<template #cell="{ column, row, value }">
 			<span v-if="column.key === 'score'">
-				{{ (row as { score: number }).score }} /
-				{{ (row as { score_out_of: number }).score_out_of }}
+				{{ getSubmissionScore(row) }} / {{ getSubmissionScoreOutOf(row) }}
 			</span>
 			<span v-else-if="column.key === 'percentage'">{{ value }}%</span>
 			<div
@@ -165,7 +164,7 @@ watch(
 		submissions.update({ filters: activeFilters(), start: 0 })
 		submissions.reload()
 	},
-	{ deep: true }
+	{ deep: true },
 )
 
 const { run: deleteSubmissions } = useBulkDeleteAction('LMS Quiz Submission', {
@@ -177,7 +176,7 @@ const { run: deleteSubmissions } = useBulkDeleteAction('LMS Quiz Submission', {
 		__('{0} of {1} submissions could not be deleted: {2}').format(
 			failed,
 			total,
-			error
+			error,
 		),
 })
 
@@ -188,6 +187,14 @@ const listOptions: ListViewOptions = {
 		name: 'QuizSubmission',
 		params: { submission: String(row.name) },
 	}),
+}
+
+function getSubmissionScore(row: LMSQuizSubmission) {
+	return row.score
+}
+
+function getSubmissionScoreOutOf(row: LMSQuizSubmission) {
+	return row.score_out_of
 }
 
 const columns = computed<ListColumn[]>(() => [

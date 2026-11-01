@@ -1,8 +1,10 @@
-
 @import 'frappe-ui/style.css';
 @import './styles/blockEditor.css';
 
-/* Fondo global y preferencia de color */
+/* =========================================================
+   CONFIGURACIÓN GLOBAL
+========================================================= */
+
 html {
 	background-color: var(--surface-base);
 	color-scheme: light;
@@ -13,25 +15,36 @@ html[data-theme='dark'] {
 	background-color: var(--surface-base);
 }
 
-/* Iconos Lucide */
 svg.lucide {
 	stroke-width: 1.5;
 }
 
-/* Altura de la cabecera */
 :root {
 	--header-frame-h: 3rem;
+
+	/* Identidad visual CComunes */
+	--ccomunes-background: var(--surface-blue-2);
+	--ccomunes-sidebar: var(--surface-base);
+	--ccomunes-primary: var(--ink-blue-5);
+	--ccomunes-secondary: var(--surface-blue-2);
+	--ccomunes-border: var(--outline-gray-2);
+	--ccomunes-text: var(--ink-blue-9);
+	--ccomunes-muted: var(--ink-gray-6);
 }
 
-/* Identidad visual del portal */
+/* =========================================================
+   IDENTIDAD VISUAL DEL PORTAL
+========================================================= */
+
 .lms-app {
-	--lms-forest: var(--ink-green-8);
-	--lms-teal: var(--ink-green-7);
-	--lms-teal-soft: var(--surface-green-1);
-	--lms-sand: var(--surface-amber-1);
-	--lms-coral: var(--ink-orange-5);
-	--lms-ink: var(--ink-base);
-	--lms-canvas: var(--surface-gray-1);
+	--lms-forest: var(--ink-blue-9);
+	--lms-teal: var(--ink-blue-5);
+	--lms-teal-soft: var(--surface-blue-2);
+	--lms-sand: var(--surface-blue-2);
+	--lms-coral: var(--ink-cyan-5);
+	--lms-ink: var(--ink-blue-9);
+	--lms-canvas: var(--surface-blue-2);
+
 	color: var(--lms-ink);
 }
 
@@ -46,29 +59,41 @@ svg.lucide {
 	backdrop-filter: blur(12px);
 }
 
+/* =========================================================
+   CABECERA
+========================================================= */
+
 .header-frame {
 	@apply flex shrink-0 items-center border-b border-outline-gray-1 bg-surface-base px-5;
 	min-height: var(--header-frame-h);
 }
 
-/* Evitar que los elementos enfocados queden bajo la cabecera */
 main#scrollContainer,
 main#main-content {
 	scroll-padding-block-start: var(--header-frame-h);
 }
 
-/* Radio seleccionado visible en modo oscuro */
+/* =========================================================
+   RADIO BUTTON EN MODO OSCURO
+========================================================= */
+
 [data-theme='dark'] [type='radio']:checked {
 	background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23FFFFFF' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
 }
 
-/* Superficie de la barra lateral en modo oscuro */
+/* =========================================================
+   BARRA LATERAL
+========================================================= */
+
 [data-theme='dark'] {
 	color-scheme: dark;
 	--surface-sidebar: var(--surface-gray-1);
 }
 
-/* Botón de alternancia entre modo día y noche */
+/* =========================================================
+   BOTÓN DE TEMA CLARO / OSCURO
+========================================================= */
+
 .theme-toggle {
 	display: inline-flex;
 	align-items: center;
@@ -79,7 +104,7 @@ main#main-content {
 	border: 1px solid var(--outline-gray-2);
 	border-radius: 0.6rem;
 	background: var(--surface-base);
-	color: var(--ink-gray-9);
+	color: var(--ink-blue-9);
 	font-size: 0.875rem;
 	font-weight: 600;
 	cursor: pointer;
@@ -90,11 +115,12 @@ main#main-content {
 }
 
 .theme-toggle:hover {
-	background: var(--surface-gray-2);
+	background: var(--surface-blue-2);
+	border-color: var(--surface-blue-2);
 }
 
 .theme-toggle:focus-visible {
-	outline: 2px solid var(--ink-green-7);
+	outline: 2px solid var(--ink-blue-5);
 	outline-offset: 2px;
 }
 
@@ -114,12 +140,16 @@ main#main-content {
 	}
 }
 
-/* Colores de la interfaz en modo oscuro */
+/* =========================================================
+   MODO OSCURO
+========================================================= */
+
 [data-theme='dark'] .lms-app {
 	--lms-canvas: var(--ink-gray-9);
 	--lms-ink: var(--surface-gray-2);
 	--lms-teal-soft: var(--ink-gray-8);
 	--lms-sand: var(--ink-gray-8);
+
 	color: var(--lms-ink);
 }
 
@@ -141,14 +171,17 @@ main#main-content {
 }
 
 [data-theme='dark'] .theme-toggle:hover {
-	background: var(--ink-gray-8);
+	background: var(--ink-gray-7);
 }
 
 [data-theme='dark'] .theme-toggle:focus-visible {
-	outline-color: var(--ink-green-4);
+	outline-color: var(--ink-blue-7);
 }
 
-/* Mejorar el contraste de las tarjetas y bloques claros en modo noche */
+/* =========================================================
+   TARJETAS Y SUPERFICIES EN MODO OSCURO
+========================================================= */
+
 [data-theme='dark'] .lms-app .bg-white,
 [data-theme='dark'] .lms-app .bg-surface-white,
 [data-theme='dark'] .lms-app .bg-surface-base {
@@ -156,7 +189,8 @@ main#main-content {
 	color: var(--surface-gray-2);
 }
 
-/* Asegurar la legibilidad de títulos y textos en tarjetas claras */
+/* Títulos y textos dentro de tarjetas */
+
 [data-theme='dark'] .lms-app .bg-white h1,
 [data-theme='dark'] .lms-app .bg-white h2,
 [data-theme='dark'] .lms-app .bg-white h3,
@@ -172,7 +206,8 @@ main#main-content {
 	color: var(--surface-gray-2);
 }
 
-/* Textos secundarios en modo noche */
+/* Textos secundarios */
+
 [data-theme='dark'] .lms-app .bg-white .text-ink-gray-4,
 [data-theme='dark'] .lms-app .bg-white .text-ink-gray-5,
 [data-theme='dark'] .lms-app .bg-white .text-ink-gray-6,
@@ -184,62 +219,72 @@ main#main-content {
 	color: var(--outline-gray-3) !important;
 }
 
-/* Enlaces dentro de las tarjetas en modo noche */
+/* Enlaces */
+
 [data-theme='dark'] .lms-app .bg-white a,
 [data-theme='dark'] .lms-app .bg-surface-white a {
-	color: var(--ink-green-4);
+	color: var(--ink-blue-7);
 }
 
 [data-theme='dark'] .lms-app .bg-white a:hover,
 [data-theme='dark'] .lms-app .bg-surface-white a:hover {
-	color: var(--ink-green-3);
+	color: var(--ink-blue-9);
 }
 
-/* Bordes visibles en tarjetas oscuras */
+/* Bordes */
+
 [data-theme='dark'] .lms-app .bg-white,
 [data-theme='dark'] .lms-app .bg-surface-white {
 	border-color: var(--ink-gray-8);
 }
 
-/* Mantener accesibles los botones del pie de los desplegables */
-[data-slot='content-body']
-	[data-slot='footer']:has(> [data-popover-footer-sticky]) {
+/* =========================================================
+   POPOVERS Y MENÚS
+========================================================= */
+
+[data-slot='content-body'] [data-slot='footer']:has(> [data-popover-footer-sticky]) {
 	position: sticky;
 	bottom: -0.25rem;
 	z-index: 1;
 }
 
-/* Evitar que los menús altos desborden la pantalla */
 .menu-content[data-slot='content'] {
 	max-height: var(--reka-popper-available-height);
 	overflow-y: auto;
 }
 
-/* Ajustar los paneles flotantes en móviles */
 @media (max-width: 639.98px) {
 	[data-slot='content-body'] {
 		max-width: calc(100vw - 2rem);
 	}
 }
 
-/* Mejorar el contraste de las viñetas */
+/* =========================================================
+   CONTENIDO ENRIQUECIDO
+========================================================= */
+
 .prose {
 	--tw-prose-bullets: var(--ink-gray-4);
 }
 
-/* Viñetas legibles en modo noche */
+/* Contraste de contenido en modo oscuro */
+
 [data-theme='dark'] .lms-app .prose {
 	--tw-prose-bullets: var(--ink-gray-5);
 	--tw-prose-body: var(--outline-gray-3);
 	--tw-prose-headings: var(--surface-gray-2);
-	--tw-prose-links: var(--ink-green-4);
+	--tw-prose-links: var(--ink-blue-7);
 	--tw-prose-bold: var(--surface-gray-2);
 	--tw-prose-counters: var(--ink-gray-5);
 	--tw-prose-hr: var(--ink-gray-8);
 	--tw-prose-quote-borders: var(--ink-gray-8);
 	--tw-prose-captions: var(--outline-gray-3);
 }
-/* Corrección de contraste en el detalle del curso: modo noche */
+
+/* =========================================================
+   DETALLE DEL CURSO EN MODO OSCURO
+========================================================= */
+
 html[data-theme='dark'] .lms-app main#main-content h1,
 html[data-theme='dark'] .lms-app main#main-content h2,
 html[data-theme='dark'] .lms-app main#main-content h3,
@@ -253,7 +298,8 @@ html[data-theme='dark'] .lms-app main#main-content strong {
 	color: var(--surface-gray-2);
 }
 
-/* Fondos de tarjetas y secciones en modo noche */
+/* Fondos de tarjetas y secciones */
+
 html[data-theme='dark'] .lms-app main#main-content .bg-white,
 html[data-theme='dark'] .lms-app main#main-content .bg-surface-white,
 html[data-theme='dark'] .lms-app main#main-content .bg-surface-base {
@@ -261,7 +307,8 @@ html[data-theme='dark'] .lms-app main#main-content .bg-surface-base {
 	border-color: var(--ink-gray-8);
 }
 
-/* Texto secundario y resumen del curso */
+/* Texto secundario */
+
 html[data-theme='dark'] .lms-app main#main-content .text-ink-gray-4,
 html[data-theme='dark'] .lms-app main#main-content .text-ink-gray-5,
 html[data-theme='dark'] .lms-app main#main-content .text-ink-gray-6,
@@ -270,10 +317,12 @@ html[data-theme='dark'] .lms-app main#main-content .text-ink-gray-7 {
 }
 
 /* Contenido enriquecido de las descripciones */
+
 html[data-theme='dark'] .lms-app main#main-content .prose {
 	color: var(--outline-gray-3);
+
 	--tw-prose-body: var(--outline-gray-3);
 	--tw-prose-headings: var(--surface-gray-2);
 	--tw-prose-bold: var(--surface-gray-2);
-	--tw-prose-links: var(--ink-green-4);
+	--tw-prose-links: var(--ink-blue-7);
 }

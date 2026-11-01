@@ -99,13 +99,24 @@ const textUses = (source: string) => {
 		const ast = parse(source).descriptor.template?.ast as Node | undefined
 		ast?.children?.forEach(walk)
 	}
-	const total = source.match(CLASS)?.length ?? 0
+	// Excluir CSS: sus selectores no son clases de la plantilla.
+	const withoutStyles = source.replace(
+	    /<style\b[^>]*>[\s\S]*?<\/style\s*>/gi,
+	    ''
+	)
+	const total = withoutStyles.match(CLASS)?.length ?? 0
 	for (let i = placed; i < total; i++) found.push('outside a template class')
 	return found
 }
 
 const sources = (readdirSync(SRC, { recursive: true }) as string[])
-	.filter((f) => /\.(vue|ts|js)$/.test(f) && !f.startsWith('tests/'))
+	.filter((f) =>
+        /\.(vue|ts|js)$/.test(f) &&
+        !f.startsWith('tests/') &&
+        !/(?:\.backup|\.bak|\.old)(?:[-_.]|$)/i.test(
+            f.split(/[\\/]/).pop() ?? ''
+        )
+    )
 	.sort()
 
 describe('text-ink-gray-5 contrast ratchet', () => {

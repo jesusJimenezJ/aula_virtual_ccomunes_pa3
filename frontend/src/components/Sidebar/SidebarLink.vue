@@ -1,3 +1,4 @@
+
 <template>
 	<SidebarItem
 		v-if="link && !link.onlyMobile"
@@ -6,6 +7,10 @@
 		:route="target.route"
 		:href="safeUrl(target.href)"
 		:active="isActive"
+		:class="[
+			'ccomunes-sidebar-link',
+			{ 'ccomunes-sidebar-link--active': isActive },
+		]"
 		:data-notifications-trigger="link.panel === 'notifications' ? '' : null"
 		@click="target.onClick?.()"
 	>
@@ -14,6 +19,7 @@
 				{{ __(link.label) }}
 			</span>
 		</Tooltip>
+
 		<template #suffix>
 			<KeyboardShortcut
 				v-if="link.shortcut"
@@ -21,13 +27,16 @@
 				:combo="link.shortcut"
 				class="me-2"
 			/>
-			<span v-else-if="link.count" class="me-2 text-p-xs text-ink-gray-6">
+
+			<span v-else-if="link.count" class="me-2 text-p-xs">
 				{{ link.count }}
 			</span>
 		</template>
 	</SidebarItem>
+
 	<ContactUsEmail v-if="isContactLink" v-model="showContactForm" />
 </template>
+
 <script setup lang="ts">
 import { KeyboardShortcut, SidebarItem, Tooltip } from 'frappe-ui'
 import { computed, ref } from 'vue'
@@ -58,8 +67,7 @@ const icon = computed(() =>
 		: props.link.icon
 )
 
-// A URL can carry an `@` in its path, and an External row's target is
-// whatever an admin typed, so the mailto guess only applies without a scheme.
+// La detección de correo solo se aplica cuando no existe un esquema URL.
 const isContactLink = computed(() =>
 	Boolean(
 		props.link.to?.includes('@') &&
@@ -70,26 +78,43 @@ const isContactLink = computed(() =>
 
 const target = computed<Target>(() => {
 	const { action, panel, to, open_in_new_window } = props.link
-	if (action === 'commandPalette')
-		return { onClick: () => (settingsStore.isCommandPaletteOpen = true) }
-	if (panel === 'notifications') return { onClick: toggleNotifications }
+
+	if (action === 'commandPalette') {
+		return {
+			onClick: () => (settingsStore.isCommandPaletteOpen = true),
+		}
+	}
+
+	if (panel === 'notifications') {
+		return { onClick: toggleNotifications }
+	}
+
 	if (!to) return {}
-	if (router.hasRoute(to)) return { route: { name: to } }
-	if (isContactLink.value)
+
+	if (router.hasRoute(to)) {
+		return { route: { name: to } }
+	}
+
+	if (isContactLink.value) {
 		return { onClick: () => (showContactForm.value = true) }
+	}
+
 	if (to.startsWith('http')) {
 		if (open_in_new_window === 0) return { href: to }
 		return { onClick: () => openExternal(to) }
 	}
-	// A Route row's target already begins with /; a Web Page's route does
-	// not. Prefixing a second slash would make it scheme-relative and send
-	// the browser off-site.
-	return { href: to.startsWith('/') ? to : `/${to}` }
+
+	// Evita duplicar la barra inicial en las rutas del sitio.
+	return {
+		href: to.startsWith('/') ? to : `/${to}`,
+	}
 })
 
 const isActive = computed<boolean>(() =>
 	Boolean(
-		props.link.activeFor?.includes(router.currentRoute.value.name as string)
+		props.link.activeFor?.includes(
+			router.currentRoute.value.name as string
+		)
 	)
 )
 </script>

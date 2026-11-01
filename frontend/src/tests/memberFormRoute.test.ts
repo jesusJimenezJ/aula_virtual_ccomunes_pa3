@@ -178,10 +178,12 @@ const save = (wrapper: ReturnType<typeof mount>) =>
  * position: the visible role name is a <label for> pointing at the control's
  * id. Throws if the pairing is wrong or the name isn't where AT can read it.
  */
-const switchNamed = (wrapper: ReturnType<typeof mount>, name: string) => {
-	const label = wrapper.findAll('label').find((l) => l.text() === name)
-	if (!label) throw new Error(`no label reading "${name}"`)
-	return wrapper.get(`[role="switch"][id="${label.attributes('for')}"]`)
+const roleRowNamed = (wrapper: ReturnType<typeof mount>, name: string) => {
+        const row = wrapper.findAll('[data-testid="role-row"]').find((item) =>
+            item.text().includes(name)
+        )
+        if (!row) throw new Error(`no role row containing "${name}"`)
+        return row
 }
 
 describe('the member form route', () => {
@@ -339,13 +341,13 @@ describe('the member form route', () => {
 			await flushPromises()
 
 			expect(save(wrapper).attributes('disabled')).toBeUndefined()
-			expect(switchNamed(wrapper, 'Student').attributes('aria-checked')).toBe(
+			expect(roleRowNamed(wrapper, 'Estudiante').attributes('aria-pressed')).toBe(
 				'true'
 			)
 			expect(
-				switchNamed(wrapper, 'Course Creator').attributes('aria-checked')
+				roleRowNamed(wrapper, 'Docente').attributes('aria-pressed')
 			).toBe('true')
-			expect(switchNamed(wrapper, 'Moderator').attributes('aria-checked')).toBe(
+			expect(roleRowNamed(wrapper, 'Personal de soporte').attributes('aria-pressed')).toBe(
 				'false'
 			)
 			// The email is the route param, not something the parent handed over.
@@ -370,7 +372,7 @@ describe('the member form route', () => {
 			await wrapper
 				.find('[data-testid="field-Email"] input')
 				.setValue('  jane@doe.com  ')
-			await switchNamed(wrapper, 'Student').trigger('click')
+			await roleRowNamed(wrapper, 'Estudiante').trigger('click')
 			await save(wrapper).trigger('click')
 			await flushPromises()
 
@@ -424,75 +426,52 @@ describe('the member form route', () => {
 	// Now renders through the shared RoleSwitches component, reversing an
 	// earlier fix for this phone route. What's still tested: each row pairs
 	// one label with its own switch, whatever the column count.
-	describe('the roles block', () => {
-		const mountAdd = async () => {
-			const router = makeRouter()
-			await router.push('/settings/users/new')
-			return mountForm(router)
-		}
+        describe('the roles block', () => {
+                const mountAdd = async () => {
+                        const router = makeRouter()
+                        await router.push('/settings/users/new')
+                        return mountForm(router)
+                }
 
-		it('gives each role a row of its own, the name beside its switch', async () => {
-			const wrapper = await mountAdd()
-			const rows = wrapper.findAll('[data-testid="role-row"]')
+                it('shows exactly the three functional profiles', async () => {
+                        const wrapper = await mountAdd()
+                        const rows = wrapper.findAll('[data-testid="role-row"]')
 
-			expect(rows.map((row) => row.get('label').text())).toEqual([
-				'Student',
-				'Course Creator',
-				'Evaluator',
-				'Moderator',
-			])
-			for (const row of rows) {
-				expect(row.findAll('label')).toHaveLength(1)
-				expect(row.findAll('[role="switch"]')).toHaveLength(1)
-			}
-		})
+                        expect(rows).toHaveLength(3)
+                        const labels = rows.map((row) => row.text())
+                        expect(labels.some((text) => text.includes('Estudiante'))).toBe(true)
+                        expect(labels.some((text) => text.includes('Docente'))).toBe(true)
+                        expect(labels.some((text) => text.includes('Personal de soporte'))).toBe(true)
+                        expect(wrapper.text()).not.toContain('Batch Evaluator')
+                })
 
-		it('names every switch by the role it sits next to', async () => {
-			const wrapper = await mountAdd()
-			for (const role of [
-				'Student',
-				'Course Creator',
-				'Evaluator',
-				'Moderator',
-			])
-				expect(switchNamed(wrapper, role).attributes('role')).toBe('switch')
-		})
+                it('uses accessible pressed-state buttons for each profile', async () => {
+                        const wrapper = await mountAdd()
+                        const rows = wrapper.findAll('[data-testid="role-row"]')
 
-		// The grid goes two-up from md now, like the other two surfaces. A
-		// switch still can't end up adjacent to a label that isn't its own.
-		it('keeps each switch paired with its own row at a phone width', async () => {
-			Object.defineProperty(window, 'innerWidth', {
-				value: 320,
-				writable: true,
-				configurable: true,
-			})
-			const wrapper = await mountAdd()
-			const rows = wrapper.findAll('[data-testid="role-row"]')
+                        expect(rows).toHaveLength(3)
+                        for (const row of rows) {
+                                expect(row.element.tagName).toBe('BUTTON')
+                                expect(row.attributes('aria-pressed')).toMatch(/^(true|false)$/)
+                        }
+                })
 
-			expect(rows).toHaveLength(4)
-			for (const row of rows) {
-				expect(row.findAll('label')).toHaveLength(1)
-				expect(row.findAll('[role="switch"]')).toHaveLength(1)
-			}
-		})
+                it('toggles the profile named by the selected row', async () => {
+                        const wrapper = await mountAdd()
+                        callMock.mockResolvedValue({ name: MEMBER })
 
-		it('toggles the role its row names, not the one beside it', async () => {
-			const wrapper = await mountAdd()
-			callMock.mockResolvedValue({ name: MEMBER })
+                        await wrapper.find('[data-testid="field-Email"] input').setValue(MEMBER)
+                        await roleRowNamed(wrapper, 'Docente').trigger('click')
+                        await save(wrapper).trigger('click')
+                        await flushPromises()
 
-			await wrapper.find('[data-testid="field-Email"] input').setValue(MEMBER)
-			await switchNamed(wrapper, 'Evaluator').trigger('click')
-			await save(wrapper).trigger('click')
-			await flushPromises()
-
-			expect(callMock.mock.calls.slice(1)).toEqual([
-				[
-					'lms.lms.api.save_role',
-					{ user: MEMBER, role: 'Batch Evaluator', value: 1 },
-				],
-			])
-		})
-	})
+                        expect(callMock).toHaveBeenCalledWith('lms.lms.api.save_role', {
+                                user: MEMBER,
+                                role: 'Course Creator',
+                                value: 1,
+                        })
+                })
+        })
 
 	// Opened from Members.vue instead. On desktop the settings dialog is still
 	// floating above whatever page the URL points at, so closing has to pop back
@@ -521,7 +500,7 @@ describe('the member form route', () => {
 		lookup.data = { name: MEMBER, roles: ['LMS Student'] }
 		await flushPromises()
 
-		await switchNamed(wrapper, 'Moderator').trigger('click')
+		await roleRowNamed(wrapper, 'Personal de soporte').trigger('click')
 		callMock.mockResolvedValue(true)
 		await save(wrapper).trigger('click')
 		await flushPromises()

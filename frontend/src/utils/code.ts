@@ -1,6 +1,7 @@
 import { Code } from 'lucide-vue-next'
 import { registerDirectives } from '@/directives'
 import { h, createApp } from 'vue'
+import type { BlockToolConstructorOptions } from '@editorjs/editorjs'
 import { HTML_ESCAPE_MAP } from '@/utils/format'
 // lib/core registers no languages; register just the picker's set to avoid bundling all ~190.
 import hljs from 'highlight.js/lib/core'
@@ -264,9 +265,22 @@ const COMMON_LANGUAGES = {
 	yaml: 'YAML',
 }
 
+interface CodeBoxData {
+    code?: string
+    format?: string
+    language?: string
+    theme?: string
+}
+
+interface CodeBoxConfig {
+    themeName?: string
+    themeURL?: string
+    useDefaultTheme?: string
+}
+
 export class CodeBox {
-	api: any
-	config: { themeName: any; themeURL: any; useDefaultTheme: any }
+    api: BlockToolConstructorOptions<CodeBoxData, CodeBoxConfig>['api']
+    config: { themeName: string; themeURL: string; useDefaultTheme: string }
 	readOnly: boolean
 	data: { code: string; format: 'text'; language: string; theme: string }
 	highlighted = false
@@ -277,7 +291,7 @@ export class CodeBox {
 	selectInput: HTMLInputElement
 	selectDropIcon: HTMLElement
 
-	constructor({ data, api, config, readOnly }) {
+	constructor({ data, api, config = {}, readOnly }: BlockToolConstructorOptions<CodeBoxData, CodeBoxConfig>) {
 		this.api = api
 		this.readOnly = readOnly
 		this.config = {
@@ -321,7 +335,7 @@ export class CodeBox {
 
 		this._injectHighlightJSCSSElement()
 
-		this.api.listeners.on(window, 'click', this._closeAllLanguageSelects, true)
+		this.api.listeners.on(document.documentElement, 'click', this._closeAllLanguageSelects, true)
 	}
 
 	static get isReadOnlySupported() {
@@ -397,7 +411,7 @@ export class CodeBox {
 			this.api.listeners.on(
 				this.codeArea,
 				'blur',
-				(event) => this._onBlur(event),
+				() => this._onBlur(),
 				false
 			)
 		}
@@ -411,7 +425,7 @@ export class CodeBox {
 		return codeAreaHolder
 	}
 
-	save(blockContent) {
+	save(_blockContent: HTMLElement): { code: string; format: 'text'; language: string; theme: string } {
 		// Canonical plain source, entity-escaped for storage, never the highlighted DOM.
 		return Object.assign({}, this.data, {
 			code: escapeForStorage(this.data.code),
@@ -419,13 +433,13 @@ export class CodeBox {
 		})
 	}
 
-	validate(savedData) {
+	validate(savedData: { code: string }): boolean {
 		if (!savedData.code.trim()) return false
 		return true
 	}
 
 	destroy() {
-		this.api.listeners.off(window, 'click', this._closeAllLanguageSelects, true)
+		this.api.listeners.off(document.documentElement, 'click', this._closeAllLanguageSelects, true)
 		this.api.listeners.off(
 			this.codeArea,
 			'focus',
@@ -441,7 +455,7 @@ export class CodeBox {
 		this.api.listeners.off(
 			this.codeArea,
 			'blur',
-			(event) => this._onBlur(event),
+			() => this._onBlur(),
 			false
 		)
 		this.api.listeners.off(
@@ -568,12 +582,12 @@ export class CodeBox {
 		selection.addRange(range)
 	}
 
-	_onBlur(event) {
+	_onBlur(): void {
 		this._captureSource()
-		this._highlightCodeArea(event)
+		this._highlightCodeArea()
 	}
 
-	_highlightCodeArea(event?) {
+	_highlightCodeArea(): void {
 		// Highlight by the chosen language only; hljs.highlight escapes the source.
 		const result = hljs.highlight(this.data.code, {
 			language: resolveCodeBoxLanguage(this.data.language),
@@ -583,20 +597,30 @@ export class CodeBox {
 		this.highlighted = true
 	}
 
-	_handleCodeAreaPaste(event) {
-		// Insert the plain-text payload only, with no outside styling.
-		event.preventDefault()
-		event.stopPropagation()
-		const text = event.clipboardData?.getData('text/plain') ?? ''
-		if (text) {
-			// execCommand preserves native undo where supported.
-			const inserted =
-				typeof document.execCommand === 'function' &&
-				document.execCommand('insertText', false, text)
-			if (!inserted) this._insertTextAtCaret(text)
+		_handleCodeAreaPaste(event?: Event): void {
+				// Insert the plain-text payload only, with no outside styling.
+				const clipboardEvent = event as (Event & {
+						clipboardData?: DataTransfer
+				}) | undefined
+
+				if (!clipboardEvent?.clipboardData) return
+
+				clipboardEvent.preventDefault()
+				clipboardEvent.stopPropagation()
+
+				const text = clipboardEvent.clipboardData.getData('text/plain') ?? ''
+
+				if (text) {
+						// execCommand preserves native undo where supported.
+						const inserted =
+								typeof document.execCommand === 'function' &&
+								document.execCommand('insertText', false, text)
+
+						if (!inserted) this._insertTextAtCaret(text)
+				}
+
+				this._captureSource()
 		}
-		this._captureSource()
-	}
 
 	_insertTextAtCaret(text: string) {
 		const selection = window.getSelection()
@@ -615,15 +639,20 @@ export class CodeBox {
 		selection.addRange(range)
 	}
 
-	_handleSelectInputClick(event) {
-		event.target.nextSibling.classList.toggle('codeBoxShow')
-	}
+	_handleSelectInputClick(event?: Event): void {
+                const target = event?.currentTarget
+                if (!(target instanceof HTMLElement)) return
+                target.nextElementSibling?.classList.toggle('codeBoxShow')
+        }
 
-	_handleSelectItemClick(event, language) {
-		event.target.parentNode.parentNode.querySelector(
-			'.codeBoxSelectInput'
-		).value = language[1]
-		event.target.parentNode.classList.remove('codeBoxShow')
+	_handleSelectItemClick(event: Event | undefined, language: [string, string]): void {
+                const target = event?.currentTarget
+                if (!(target instanceof HTMLElement)) return
+
+                const holder = target.parentElement?.parentElement
+                const input = holder?.querySelector<HTMLInputElement>('.codeBoxSelectInput')
+                if (input) input.value = language[1]
+                target.parentElement?.classList.remove('codeBoxShow')
 		this.codeArea.removeAttribute('class')
 		this.data.language = language[0]
 		this.codeArea.setAttribute(

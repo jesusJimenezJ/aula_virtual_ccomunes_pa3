@@ -85,7 +85,7 @@ export const EXEMPT_END = /token-exempt-end\b/
 
 // `src/tests` holds offending strings as fixtures, so it is not scanned.
 const scripts = import.meta.glob(
-	['../../**/*.{vue,ts,js}', '!../../tests/**'],
+	['../../**/*.{vue,ts,js}', '!../../tests/**', '!../../**/*.backup*', '!../../**/*.bak*', '!../../**/*.old'],
 	{
 		query: '?raw',
 		import: 'default',
@@ -109,7 +109,7 @@ export const onDisk = (file: string) => {
 }
 
 const cssPaths = Object.keys(
-	import.meta.glob(['../../**/*.css', '!../../tests/**'])
+	import.meta.glob(['../../**/*.css', '!../../tests/**', '!../../**/*.backup*', '!../../**/*.bak*', '!../../**/*.old'])
 )
 const styles = Object.fromEntries(
 	cssPaths.map((path) => [path, onDisk(path.slice('../../'.length))])
@@ -227,15 +227,14 @@ const CLASS_LIKE =
  */
 export const classesOn = (line: string): string[] => {
 	const lists: string[] = []
-	for (const m of line.matchAll(
-		/(?:class|className)\s*=\s*(?:"([^"]*)"|'([^']*)')/g
-	)) {
-		lists.push(m[1] ?? m[2] ?? '')
-	}
-	for (const m of line.matchAll(/:class\s*=\s*"([^"]*)"/g)) lists.push(m[1])
 	for (const m of line.matchAll(/(['"`])((?:(?!\1)[^\\]|\\.)*)\1/g)) {
-		if (CLASS_LIKE.test(m[2])) lists.push(m[2])
-	}
+                // Ignorar valores de selectores CSS como [class*="text-ink-red"].
+                const before = line.slice(0, m.index)
+                if (/\[\s*class(?:Name)?\s*(?:\*|~|\^|\$|\|)?=\s*$/.test(before)) {
+                        continue
+                }
+                if (CLASS_LIKE.test(m[2])) lists.push(m[2])
+        }
 	for (const m of line.matchAll(/@apply\s+([^;}]+)/g)) lists.push(m[1])
 	return [...new Set(lists)].flatMap((list) =>
 		list

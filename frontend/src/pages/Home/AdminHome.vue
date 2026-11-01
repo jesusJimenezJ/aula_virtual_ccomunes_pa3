@@ -1,26 +1,6 @@
 <template>
 	<div class="instructor-home">
-		<!-- Bienvenida del docente -->
-		<section class="instructor-home__welcome">
-			<div>
-				<span class="instructor-home__eyebrow">
-					Ccomunes · Espacio docente
-				</span>
-				<h2>Gestiona tus cursos</h2>
-				<p>
-					Organiza tus cursos y contenidos de Psicología Social Comunitaria.
-				</p>
-			</div>
-
-			<Button :route="{ name: 'NewCourse' }" class="instructor-home__browse">
-				<template #prefix>
-					<span class="lucide-plus size-4" />
-				</template>
-				Crear curso
-			</Button>
-		</section>
-
-		<!-- Evaluaciones próximas -->
+<!-- Evaluaciones próximas -->
 		<section v-if="evals?.data?.length" class="instructor-home__section">
 			<h2 class="instructor-home__section-title">Evaluaciones próximas</h2>
 

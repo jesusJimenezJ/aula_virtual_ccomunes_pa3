@@ -185,129 +185,313 @@ function onUploadFailure(error: unknown) {
 
 <style scoped>
 .course-documents {
-	padding: clamp(1rem, 2.5vw, 1.5rem);
-	border: 1px solid var(--outline-gray-2);
-	border-radius: 1.1rem;
-	background: var(--surface-base);
-	box-shadow: 0 8px 24px color-mix(in srgb, var(--ink-base) 4%, transparent);
+        min-width: 0;
+        padding: 1rem;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        border: 1px solid #D8E5F0;
+        /* token-exempt-end */
+        border-radius: 14px;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background: #FFFFFF;
+        /* token-exempt-end */
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        box-shadow: 0 3px 12px rgb(23 50 77 / 4%);
+        /* token-exempt-end */
 }
 
 .course-documents__heading,
 .course-documents__card-heading {
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
-	gap: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
 }
 
 .course-documents__eyebrow {
-	margin: 0 0 0.3rem;
-	color: var(--ink-green-7);
-	font-size: 0.7rem;
-	font-weight: 750;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
+        margin: 0 0 0.2rem;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        color: #1769AA;
+        /* token-exempt-end */
+        font-size: 0.7rem;
+        font-weight: 750;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
 }
 
 .course-documents__heading h2 {
-	margin: 0;
-	color: var(--ink-base);
-	font-size: 1.25rem;
-	font-weight: 750;
+        margin: 0;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        color: #17324D;
+        /* token-exempt-end */
+        font-size: 1.05rem;
+        font-weight: 700;
 }
 
 .course-documents__description,
 .course-documents__card-heading p {
-	margin: 0.25rem 0 0;
-	color: var(--ink-gray-7);
-	font-size: 0.85rem;
+        margin: 0.2rem 0 0;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        color: #647B91;
+        /* token-exempt-end */
+        font-size: 0.8rem;
 }
 
 .course-documents__visibility-note {
-	margin: 0.4rem 0 0;
-	color: var(--ink-amber-7);
-	font-size: 0.78rem;
+        margin: 0.35rem 0 0;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        color: #247DBB;
+        /* token-exempt-end */
+        font-size: 0.76rem;
 }
 
 .course-documents__grid {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 1rem;
-	margin-top: 1.25rem;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 0.85rem;
 }
 
 .course-documents__card {
-	min-width: 0;
-	padding: 1rem;
-	border: 1px solid var(--surface-green-2);
-	border-radius: 0.85rem;
-	background: var(--surface-base);
+        min-width: 0;
+        padding: 0.8rem;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        border: 1px solid #D8E5F0;
+        /* token-exempt-end */
+        border-radius: 11px;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background: #F8FBFF;
+        /* token-exempt-end */
 }
 
 .course-documents__card-heading {
-	justify-content: flex-start;
-	align-items: center;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.65rem;
 }
 
 .course-documents__icon {
-	display: grid;
-	width: 2.5rem;
-	height: 2.5rem;
-	place-items: center;
-	flex: none;
-	border-radius: 0.7rem;
-	background: var(--surface-green-1);
-	color: var(--ink-green-7);
+        display: grid;
+        width: 2.15rem;
+        height: 2.15rem;
+        place-items: center;
+        flex: none;
+        border-radius: 0.65rem;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background: #EAF4FF;
+        /* token-exempt-end */
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        color: #1769AA;
+        /* token-exempt-end */
 }
 
 .course-documents__card-heading h3 {
-	margin: 0;
-	color: var(--ink-base);
-	font-size: 0.95rem;
-	font-weight: 700;
+        margin: 0;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        color: #17324D;
+        /* token-exempt-end */
+        font-size: 0.9rem;
+        font-weight: 700;
 }
 
 .course-documents__files {
-	display: grid;
-	gap: 0.5rem;
-	margin-top: 0.85rem;
+        display: grid;
+        gap: 0.4rem;
+        margin-top: 0.65rem;
 }
 
 .course-documents__file {
-	display: flex;
-	align-items: center;
-	gap: 0.55rem;
-	min-width: 0;
-	padding: 0.65rem 0.7rem;
-	border: 1px solid var(--outline-gray-2);
-	border-radius: 0.65rem;
-	background: var(--surface-base);
-	color: var(--ink-green-7);
-	font-size: 0.82rem;
-	text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-width: 0;
+        padding: 0.55rem 0.65rem;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        border: 1px solid #D8E5F0;
+        /* token-exempt-end */
+        border-radius: 8px;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background: #FFFFFF;
+        /* token-exempt-end */
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        color: #1769AA;
+        /* token-exempt-end */
+        font-size: 0.8rem;
+        text-decoration: none;
+        transition: border-color 160ms ease, background-color 160ms ease;
 }
 
 .course-documents__file:hover {
-	border-color: var(--outline-green-3);
-	background: var(--surface-gray-1);
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        border-color: #247DBB;
+        /* token-exempt-end */
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background: #EAF4FF;
+        /* token-exempt-end */
 }
 
 .course-documents__empty {
-	margin: 0.9rem 0;
-	color: var(--ink-gray-7);
-	font-size: 0.82rem;
+        margin: 0.65rem 0;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        color: #647B91;
+        /* token-exempt-end */
+        font-size: 0.8rem;
 }
 
 .course-documents__upload {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.4rem;
-	margin-top: 0.8rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin-top: 0.6rem;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        border: 1px solid #1769AA !important;
+        /* token-exempt-end */
+        border-radius: 8px !important;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background: #1769AA !important;
+        /* token-exempt-end */
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        color: #FFFFFF !important;
+        /* token-exempt-end */
+        font-size: 0.8rem;
+        transition: background-color 160ms ease;
+}
+
+.course-documents__upload:hover {
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background: #247DBB !important;
+        /* token-exempt-end */
 }
 
 @media (max-width: 640px) {
-	.course-documents__grid {
-		grid-template-columns: 1fr;
-	}
+        .course-documents {
+                padding: 0.8rem;
+        }
+
+        .course-documents__grid {
+                grid-template-columns: 1fr;
+                gap: 0.65rem;
+        }
+
+        .course-documents__card {
+                padding: 0.75rem;
+        }
 }
+
+/* COURSE-DOCUMENTS-LAYOUT-FIX-V2 */
+.course-documents {
+    width: 100%;
+    min-width: 0;
+    /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+    background: #ffffff;
+    /* token-exempt-end */
+}
+
+.course-documents__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 0.85rem;
+    width: 100%;
+}
+
+.course-documents__card {
+    display: flex;
+    min-width: 0;
+    min-height: 190px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.7rem;
+    padding: 0.9rem;
+    /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+    border: 1px solid #d8e5f0;
+    /* token-exempt-end */
+    border-radius: 12px;
+    /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+    background: #f8fbff;
+    /* token-exempt-end */
+}
+
+.course-documents__card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    gap: 0.65rem;
+}
+
+.course-documents__card-heading > div {
+    min-width: 0;
+}
+
+.course-documents__files {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.course-documents__file {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.65rem;
+    /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+    border: 1px solid #d8e5f0;
+    /* token-exempt-end */
+    border-radius: 8px;
+    /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+    background: #ffffff;
+    /* token-exempt-end */
+}
+
+.course-documents__empty {
+    margin: 0.35rem 0;
+    /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+    color: #647b91;
+    /* token-exempt-end */
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+.course-documents__upload {
+    display: inline-flex;
+    width: 100%;
+    min-height: 2.4rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: auto;
+    white-space: nowrap;
+    /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+    border: 1px solid #1769aa !important;
+    /* token-exempt-end */
+    border-radius: 8px !important;
+    /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+    background: #1769aa !important;
+    /* token-exempt-end */
+    /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+    color: #ffffff !important;
+    /* token-exempt-end */
+    font-size: 0.8rem;
+}
+
+.course-documents__upload:hover {
+    /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+    background: #104f85 !important;
+    /* token-exempt-end */
+}
+
+@media (max-width: 640px) {
+    .course-documents__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .course-documents__card {
+        min-height: 0;
+    }
+}
+/* END COURSE-DOCUMENTS-LAYOUT-FIX-V2 */
+
 </style>

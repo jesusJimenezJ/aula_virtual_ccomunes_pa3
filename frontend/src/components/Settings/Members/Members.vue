@@ -8,7 +8,7 @@
 		:has-next-page="list.hasNextPage"
 		v-model:search="list.search"
 		searchable
-		empty-name="Users"
+		empty-name="Usuarios"
 		empty-icon="lucide-user"
 		@new="openForm(null)"
 		@load-more="list.loadMore()"
@@ -18,7 +18,7 @@
 			<Select
 				v-model="role"
 				class="w-40"
-				:aria-label="__('Filter by role')"
+				:aria-label="__('Filtrar por perfil')"
 				:options="roleOptions()"
 			/>
 		</template>

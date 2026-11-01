@@ -19,13 +19,13 @@
 		</div>
 		<div
 			v-else
-			class="relative flex flex-1 flex-col"
+			class="relative flex w-full min-w-0 flex-1 flex-col"
 			:class="{ 'min-h-0': !flowsWithPage }"
 		>
 			<Tabs
 				v-model="activeKey"
 				:tabs="shorthandTabs"
-				class="detail-tabs"
+				class="detail-tabs w-full min-w-0 self-stretch"
 				:class="{ 'page-flow': flowsWithPage }"
 			>
 				<!-- The icon belongs in the prefix region, not the label: `#tab-label`
@@ -208,6 +208,23 @@ defineExpose({ instanceFor: (key: string): unknown => instances[key] ?? null })
 	height: var(--header-frame-h);
 	padding-inline: 1.25rem;
 }
+
+
+/* TAB-PANEL-FULL-WIDTH-V1 */
+.detail-tabs {
+    width: 100%;
+    min-width: 0;
+    align-self: stretch;
+}
+
+.detail-tabs :deep([role='tabpanel']) {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+/* END TAB-PANEL-FULL-WIDTH-V1 */
 
 .detail-tabs {
 	flex: 1 1 0%;

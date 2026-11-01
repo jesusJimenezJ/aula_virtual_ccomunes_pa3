@@ -154,7 +154,10 @@ const vueFilesUnder = (dir: string): string[] => {
 	for (const entry of readdirSync(dir, { withFileTypes: true })) {
 		const full = join(dir, entry.name)
 		if (entry.isDirectory()) found.push(...vueFilesUnder(full))
-		else if (entry.name.endsWith('.vue')) found.push(full)
+		else if (
+                entry.name.endsWith('.vue') &&
+                !/(?:\.backup|\.bak|\.old)(?:[-_.]|$)/i.test(entry.name)
+            ) found.push(full)
 	}
 	return found
 }

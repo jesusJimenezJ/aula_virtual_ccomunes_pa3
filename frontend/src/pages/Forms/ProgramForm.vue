@@ -169,8 +169,7 @@
 					{
 						label: __('Add'),
 						variant: 'solid',
-						onClick: ({ close }: { close: () => void }) =>
-							currentForm == 'course' ? addCourse(close) : addMember(close),
+						onClick: handleDialogAdd,
 					},
 				]"
 			>
@@ -277,7 +276,7 @@ const props = withDefaults(
 	}>(),
 	{
 		programName: 'new',
-	}
+	},
 )
 
 // The parent list refetches through its own updatePrograms(), which drives the
@@ -408,7 +407,7 @@ watch(
 		fetchCourses()
 		fetchMembers()
 	},
-	{ immediate: true }
+	{ immediate: true },
 )
 
 watch(
@@ -416,7 +415,7 @@ watch(
 	(doc) => {
 		if (doc) applyDoc(doc)
 	},
-	{ immediate: true }
+	{ immediate: true },
 )
 
 const validateTitle = () => {
@@ -453,7 +452,7 @@ const createNewProgram = () => {
 			onError(err: FrappeResourceError) {
 				toast.warning(resourceErrorMessage(err, __('Error')))
 			},
-		}
+		},
 	)
 }
 
@@ -477,7 +476,7 @@ const updateProgram = () => {
 			onError(err: FrappeResourceError) {
 				toast.warning(resourceErrorMessage(err, __('Error')))
 			},
-		}
+		},
 	)
 }
 
@@ -491,6 +490,11 @@ const openChildForm = (formType: 'course' | 'member') => {
 	}
 }
 
+const handleDialogAdd = ({ close }: { close: () => void }) => {
+	if (currentForm.value === 'course') addCourse(close)
+	else addMember(close)
+}
+
 const addCourse = (close: () => void) => {
 	if (!course.value) {
 		toast.warning(__('Please select a course'))
@@ -498,7 +502,7 @@ const addCourse = (close: () => void) => {
 	}
 
 	const existingCourse = program.value.program_courses.find(
-		(c: any) => c.course === course.value
+		(c: any) => c.course === course.value,
 	)
 	if (!existingCourse) {
 		program.value.program_courses.push({
@@ -522,7 +526,7 @@ const addMember = (close: () => void) => {
 	}
 
 	const existingMember = program.value.program_members.find(
-		(m: ProgramMember) => m.member === member.value
+		(m: ProgramMember) => m.member === member.value,
 	)
 	if (!existingMember) {
 		program.value.program_members.push({
@@ -564,7 +568,7 @@ const updateOrder = async (e: any) => {
 					onError(err: FrappeResourceError) {
 						toast.warning(resourceErrorMessage(err, __('Error')))
 					},
-				}
+				},
 			)
 			await wait(100)
 		}
@@ -576,16 +580,16 @@ const wait = (ms: number) => new Promise((res) => setTimeout(res, ms))
 const remove = (
 	selections: string[],
 	unselectAll: () => void,
-	type: string
+	type: string,
 ) => {
 	const selectionsArray = Array.from(selections)
 	if (type === 'courses') {
 		program.value.program_courses = program.value.program_courses.filter(
-			(c: any) => !selectionsArray.includes(c.name || c.course)
+			(c: any) => !selectionsArray.includes(c.name || c.course),
 		)
 	} else {
 		program.value.program_members = program.value.program_members.filter(
-			(m: any) => !selectionsArray.includes(m.name || m.member)
+			(m: any) => !selectionsArray.includes(m.name || m.member),
 		)
 	}
 	dirty.value = true
@@ -597,7 +601,7 @@ const deleteProgram = () => {
 	$dialog({
 		title: __('Delete Program'),
 		message: __(
-			'Are you sure you want to delete this program? This action cannot be undone.'
+			'Are you sure you want to delete this program? This action cannot be undone.',
 		),
 		actions: [
 			{

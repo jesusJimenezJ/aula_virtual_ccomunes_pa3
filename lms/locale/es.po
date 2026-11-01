@@ -1,22 +1,18 @@
+
 msgid ""
 msgstr ""
-"Project-Id-Version: frappe\n"
+"Project-Id-Version:  frappe\n"
 "Report-Msgid-Bugs-To: jannat@frappe.io\n"
 "POT-Creation-Date: 2026-10-02 20:16+0000\n"
-"PO-Revision-Date: 2026-10-05 12:01\n"
+"PO-Revision-Date: 2026-10-05 12:01+0000\n"
 "Last-Translator: jannat@frappe.io\n"
-"Language-Team: Spanish\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Crowdin-Project: frappe\n"
-"X-Crowdin-Project-ID: 639578\n"
-"X-Crowdin-Language: es-ES\n"
-"X-Crowdin-File: /[frappe.lms] develop/lms/locale/main.pot\n"
-"X-Crowdin-File-ID: 90\n"
 "Language: es_ES\n"
+"Language-Team: Spanish\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: lms/templates/emails/assignment_submission.html:5
 msgid " Please evaluate and grade it."
@@ -115,6 +111,7 @@ msgid "A line or two about this person"
 msgstr ""
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:290
+#, python-brace-format
 msgid "A new batch '{0}' has been published that might interest you. Check it out!"
 msgstr ""
 
@@ -123,6 +120,7 @@ msgid "A new batch has been published on "
 msgstr ""
 
 #: lms/lms/doctype/lms_course/lms_course.py:214
+#, python-brace-format
 msgid "A new course '{0}' has been published that might interest you. Check it out!"
 msgstr ""
 
@@ -132,6 +130,7 @@ msgstr ""
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:252
 #: lms/lms/doctype/lms_course/lms_course.py:178
+#, python-brace-format
 msgid "A new course has been published on {0}"
 msgstr ""
 
@@ -144,6 +143,7 @@ msgid "A short summary of the course for search results."
 msgstr ""
 
 #: lms/lms/doctype/lms_assignment_submission/lms_assignment_submission.py:100
+#, python-brace-format
 msgid "A submission for {0} by {1} already exists."
 msgstr ""
 
@@ -170,6 +170,7 @@ msgstr "Aceptación de términos y/o políticas"
 
 #: frontend/src/components/Quiz/QuestionAnswers.vue:114
 #: frontend/src/components/Quiz/QuestionAnswers.vue:115
+#, python-brace-format
 msgid "Accepted answer {0}"
 msgstr ""
 
@@ -203,6 +204,7 @@ msgstr "Acciones"
 #: frontend/src/components/Settings/Raven/WorkspaceChannels.vue:163
 #: frontend/src/components/Settings/Raven/WorkspaceList.vue:172
 #: frontend/src/components/Settings/Sidebar/SidebarSettings.vue:233
+#, python-brace-format
 msgid "Actions for {0}"
 msgstr ""
 
@@ -334,6 +336,7 @@ msgid "Add at least one course or batch."
 msgstr ""
 
 #: lms/lms/doctype/lms_question/lms_question.py:61
+#, python-brace-format
 msgid "Add at least one possible answer for this question: {0}"
 msgstr "Añade al menos una respuesta posible para esta pregunta: {0}"
 
@@ -408,10 +411,12 @@ msgid "Add your first question and edit it right here. Choices, correct answers 
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/MassRemovalConfirmDialog.vue:104
+#, python-brace-format
 msgid "Add {0} members"
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/MassRemovalConfirmDialog.vue:100
+#, python-brace-format
 msgid "Add {0}, remove {1}"
 msgstr ""
 
@@ -467,6 +472,7 @@ msgid "Administrator"
 msgstr "Administrador"
 
 #: frontend/src/components/Quiz.vue:261
+#, python-brace-format
 msgid "After {0} {1}, the quiz will be automatically submitted."
 msgstr ""
 
@@ -506,6 +512,7 @@ msgid "All questions should have the same marks if the limit is set."
 msgstr "Todas las preguntas deben tener la misma puntuación si se establece el límite."
 
 #: frontend/src/components/Modals/EvaluationModal.vue:28
+#, python-brace-format
 msgid "All times in {0}"
 msgstr ""
 
@@ -602,6 +609,7 @@ msgid "Amount with GST"
 msgstr "Importe con GST"
 
 #: lms/lms/utils.py:1005
+#, python-brace-format
 msgid "An email can carry at most {0} images. Please send the rest separately."
 msgstr ""
 
@@ -756,7 +764,6 @@ msgstr "Evaluación"
 #. Label of the assessment_name (Dynamic Link) field in DocType 'LMS
 #. Assessment'
 #. Label of the assessment_name (Dynamic Link) field in DocType 'LMS Lesson
-#. Assessment'
 #: lms/lms/doctype/lms_assessment/lms_assessment.json
 #: lms/lms/doctype/lms_lesson_assessment/lms_lesson_assessment.json
 msgid "Assessment Name"
@@ -774,6 +781,7 @@ msgid "Assessment added successfully"
 msgstr "Evaluación añadida correctamente"
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:159
+#, python-brace-format
 msgid "Assessment {0} has already been added to this batch."
 msgstr "La evaluación {0} ya se ha añadido a este lote."
 
@@ -868,6 +876,7 @@ msgid "At least one test case is required for the programming exercise."
 msgstr ""
 
 #: lms/lms/api.py:128
+#, python-brace-format
 msgid "At most {0} documents per request"
 msgstr ""
 
@@ -876,6 +885,7 @@ msgid "Attempts"
 msgstr ""
 
 #: frontend/src/components/Modals/LiveClassAttendance.vue:4
+#, python-brace-format
 msgid "Attendance for Class - {0}"
 msgstr ""
 
@@ -1019,14 +1029,17 @@ msgid "Badge assigned successfully"
 msgstr ""
 
 #: lms/lms/doctype/lms_badge_assignment/lms_badge_assignment.py:35
+#, python-brace-format
 msgid "Badge {0} has already been assigned to this {1}."
 msgstr ""
 
 #: lms/lms/doctype/lms_badge_assignment/lms_badge_assignment.py:47
+#, python-brace-format
 msgid "Badge {0} is disabled."
 msgstr ""
 
 #: lms/lms/doctype/lms_badge/lms_badge.py:76
+#, python-brace-format
 msgid "Badge {0} not found"
 msgstr ""
 
@@ -1317,6 +1330,7 @@ msgstr ""
 
 #: frontend/src/components/Quiz.vue:597
 #: frontend/src/pages/QuizSubmission.vue:327
+#, python-brace-format
 msgid "Camera at {0}"
 msgstr ""
 
@@ -1340,10 +1354,12 @@ msgid "Cancelled"
 msgstr "Cancelado"
 
 #: lms/lms/sidebar.py:172
+#, python-brace-format
 msgid "Cannot delete the built-in sidebar links {0}. Switch them off instead."
 msgstr ""
 
 #: lms/lms/api.py:3314
+#, python-brace-format
 msgid "Cannot search for roles: {0}"
 msgstr ""
 
@@ -1404,6 +1420,7 @@ msgid "Category updated successfully"
 msgstr ""
 
 #: lms/lms/api.py:3390
+#, python-brace-format
 msgid "Category {0} does not exist."
 msgstr ""
 
@@ -1593,10 +1610,12 @@ msgid "Chapter updated successfully"
 msgstr ""
 
 #: lms/lms/api.py:1020
+#, python-brace-format
 msgid "Chapter {0} does not exist."
 msgstr ""
 
 #: lms/lms/doctype/course_chapter/course_chapter.py:61
+#, python-brace-format
 msgid "Chapter {0} not found"
 msgstr ""
 
@@ -1631,6 +1650,7 @@ msgid "Check Submissions"
 msgstr ""
 
 #: lms/templates/certificates_section.html:24
+#, python-brace-format
 msgid "Check out the {0} to know more about certification."
 msgstr "Consulta {0} para saber más sobre la certificación."
 
@@ -1713,7 +1733,7 @@ msgstr ""
 #: frontend/src/components/Controls/MultiLink.vue:48
 #: frontend/src/components/Controls/MultiLink.vue:51
 msgid "Clear"
-msgstr "Quitar"
+msgstr "Limpiar"
 
 #. Option for the 'Role Preference' (Select) field in DocType 'User'
 #: lms/fixtures/custom_field.json
@@ -1959,6 +1979,7 @@ msgid "Complete the quiz to continue the video."
 msgstr ""
 
 #: frontend/src/components/VideoBlock.vue:151
+#, python-brace-format
 msgid "Complete the upcoming quiz to continue watching the video. The quiz will open in {0} {1}."
 msgstr ""
 
@@ -2136,6 +2157,7 @@ msgid "Could not count the list"
 msgstr ""
 
 #: lms/lms/course_import_export.py:228
+#, python-brace-format
 msgid "Could not create the course ZIP file. Please try again later. Error: {0}"
 msgstr ""
 
@@ -2185,6 +2207,7 @@ msgid "Could not start the payment. Please contact the administrator."
 msgstr ""
 
 #: lms/lms/doctype/lms_enrollment/lms_enrollment.py:201
+#, python-brace-format
 msgid "Could not update enrollments: {0}"
 msgstr ""
 
@@ -2430,6 +2453,7 @@ msgid "Course already added to program"
 msgstr ""
 
 #: lms/lms/course_import_export.py:950
+#, python-brace-format
 msgid "Course asset {0} is not a supported image, video, audio or PDF file."
 msgstr ""
 
@@ -2503,10 +2527,12 @@ msgid "Course updated successfully"
 msgstr ""
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:136
+#, python-brace-format
 msgid "Course {0} has already been added to this batch."
 msgstr "El curso {0} ya se ha añadido a este lote."
 
 #: lms/lms/doctype/lms_program/lms_program.py:32
+#, python-brace-format
 msgid "Course {0} has already been added to this program."
 msgstr ""
 
@@ -2592,7 +2618,7 @@ msgstr ""
 #: frontend/src/components/Controls/Link.vue:67
 #: frontend/src/components/Controls/Link.vue:73
 msgid "Create New"
-msgstr "Crear"
+msgstr "Crear nuevo"
 
 #: frontend/src/pages/Forms/ProgramForm.vue:3
 msgid "Create Program"
@@ -2896,6 +2922,7 @@ msgid "Delete this quiz?"
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/DeleteConfirmDialog.vue:4
+#, python-brace-format
 msgid "Delete {0}?"
 msgstr "¿Eliminar {0}?"
 
@@ -2941,6 +2968,7 @@ msgid "Deleting…"
 msgstr ""
 
 #: lms/lms/api.py:1327
+#, python-brace-format
 msgid "Deletion not allowed for {0}"
 msgstr ""
 
@@ -3179,6 +3207,7 @@ msgid "Edit question"
 msgstr ""
 
 #: frontend/src/components/Quiz/QuestionCard.vue:11
+#, python-brace-format
 msgid "Edit question {0}"
 msgstr ""
 
@@ -3212,7 +3241,6 @@ msgstr "Detalles de formación"
 #. Option for the 'Send Notification for Published Courses' (Select) field in
 #. DocType 'LMS Settings'
 #. Option for the 'Send Notification for Published Batches' (Select) field in
-#. DocType 'LMS Settings'
 #: frontend/src/components/Modals/NewMemberModal.vue:18
 #: frontend/src/components/Settings/Members/MemberForm.vue:41
 #: frontend/src/pages/Forms/MemberForm.vue:14
@@ -3227,6 +3255,7 @@ msgid "Email Account"
 msgstr "Cuentas de correo electrónico"
 
 #: lms/lms/email_account.py:316
+#, python-brace-format
 msgid "Email Account {0} does not exist"
 msgstr ""
 
@@ -3261,6 +3290,7 @@ msgid "Email account updated successfully"
 msgstr "Cuenta de correo electrónico actualizada correctamente"
 
 #: lms/lms/email_account.py:368
+#, python-brace-format
 msgid "Email accounts cannot be updated through {0}"
 msgstr ""
 
@@ -3276,6 +3306,7 @@ msgid "Email sent successfully"
 msgstr "Correo electrónico enviado correctamente"
 
 #: lms/lms/email_account.py:164 lms/lms/email_account.py:345
+#, python-brace-format
 msgid "Email service {0} is not supported"
 msgstr ""
 
@@ -3350,6 +3381,7 @@ msgid "Enable this only if you want to upload a SCORM package as a chapter."
 msgstr ""
 
 #: lms/lms/email_account.py:277
+#, python-brace-format
 msgid "Enable {0} on {1} before making it the default."
 msgstr ""
 
@@ -3493,6 +3525,7 @@ msgid "Enrollment Confirmation Email Template"
 msgstr ""
 
 #: lms/lms/doctype/lms_batch_enrollment/lms_batch_enrollment.py:190
+#, python-brace-format
 msgid "Enrollment Confirmation for {0}"
 msgstr ""
 
@@ -3502,6 +3535,7 @@ msgid "Enrollment Count"
 msgstr "Recuento de inscripciones"
 
 #: frontend/src/pages/Programs/ProgramEnrollment.vue:127
+#, python-brace-format
 msgid "Enrollment for Program {0}"
 msgstr ""
 
@@ -3586,6 +3620,7 @@ msgid "Error creating email template"
 msgstr ""
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:366
+#, python-brace-format
 msgid "Error creating live class. Please try again. {0}"
 msgstr ""
 
@@ -3594,18 +3629,22 @@ msgid "Error creating quiz"
 msgstr ""
 
 #: frontend/src/pages/Questions.vue:248
+#, python-brace-format
 msgid "Error deleting question: {0}"
 msgstr ""
 
 #: frontend/src/pages/Questions.vue:249
+#, python-brace-format
 msgid "Error deleting questions: {0}"
 msgstr ""
 
 #: frontend/src/pages/Quizzes.vue:164
+#, python-brace-format
 msgid "Error deleting quiz: {0}"
 msgstr ""
 
 #: frontend/src/pages/Quizzes.vue:165
+#, python-brace-format
 msgid "Error deleting quizzes: {0}"
 msgstr ""
 
@@ -3736,7 +3775,6 @@ msgstr "Evaluador"
 #. Label of the evaluator_name (Data) field in DocType 'LMS Certificate'
 #. Label of the evaluator_name (Data) field in DocType 'LMS Certificate
 #. Evaluation'
-#. Label of the evaluator_name (Data) field in DocType 'LMS Certificate
 #. Request'
 #: lms/lms/doctype/lms_certificate/lms_certificate.json
 #: lms/lms/doctype/lms_certificate_evaluation/lms_certificate_evaluation.json
@@ -3758,6 +3796,7 @@ msgid "Evaluator is required."
 msgstr ""
 
 #: lms/lms/api.py:632
+#, python-brace-format
 msgid "Evaluator {0} not found"
 msgstr ""
 
@@ -3778,6 +3817,7 @@ msgid "Every member of this workspace was added by a rule."
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/WorkspaceMembers.vue:230
+#, python-brace-format
 msgid "Every member of {0} was added by a rule."
 msgstr ""
 
@@ -3815,6 +3855,7 @@ msgid "Expected Output"
 msgstr ""
 
 #: lms/lms/api.py:2470
+#, python-brace-format
 msgid "Expected {0} outputs, got {1}"
 msgstr ""
 
@@ -3859,10 +3900,12 @@ msgid "Explanation "
 msgstr "Explicación "
 
 #: frontend/src/components/Quiz/QuestionAnswers.vue:45
+#, python-brace-format
 msgid "Explanation for option {0}"
 msgstr ""
 
 #: frontend/src/components/Quiz/QuestionAnswers.vue:47
+#, python-brace-format
 msgid "Explanation for option {0}, shown as feedback (optional)"
 msgstr ""
 
@@ -3917,10 +3960,12 @@ msgid "Failed to create email account, Invalid credentials"
 msgstr "Falló al crear cuenta de correo, credenciales inválidas"
 
 #: frontend/src/pages/Programs/ProgramEnrollment.vue:190
+#, python-brace-format
 msgid "Failed to enroll in program: {0}"
 msgstr ""
 
 #: lms/lms/doctype/lms_live_class/lms_live_class.py:226
+#, python-brace-format
 msgid "Failed to fetch attendance data from Zoom for class {0}: {1}"
 msgstr ""
 
@@ -3941,6 +3986,7 @@ msgid "Failed to send email"
 msgstr ""
 
 #: frontend/src/pages/ProgrammingExercises/ProgrammingExerciseSubmission.vue:565
+#, python-brace-format
 msgid "Failed to submit. Please try again. {0}"
 msgstr ""
 
@@ -3949,6 +3995,7 @@ msgid "Failed to update email account, Invalid credentials"
 msgstr "Falló al actualizar cuenta de correo, credenciales inválidas"
 
 #: frontend/src/utils/index.js:928
+#, python-brace-format
 msgid "Failed to update meta tags {0}"
 msgstr ""
 
@@ -3995,6 +4042,7 @@ msgid "File not found"
 msgstr "Archivo no encontrado"
 
 #: lms/lms/doctype/lms_quiz/lms_quiz.py:648
+#, python-brace-format
 msgid "File type of {0} is not allowed in quiz answers."
 msgstr ""
 
@@ -4404,6 +4452,7 @@ msgstr "Hola"
 
 #: lms/lms/notification/certificate_request_reminder/certificate_request_reminder.html:1
 #: lms/templates/emails/certificate_request_notification.html:1
+#, python-brace-format
 msgid "Hey {0}"
 msgstr "Hola {0}"
 
@@ -4416,6 +4465,7 @@ msgid "Hi"
 msgstr "Hola"
 
 #: lms/templates/emails/lms_course_interest.html:3
+#, python-brace-format
 msgid "Hi {0},"
 msgstr "Hola {0},"
 
@@ -4501,10 +4551,12 @@ msgid "I am currently working here"
 msgstr "Actualmente trabajo aquí"
 
 #: lms/templates/emails/certification.html:6
+#, python-brace-format
 msgid "I am delighted to inform you that you have successfully earned your certification for the {0} course. Congratulations!"
 msgstr "Me complace comunicarte que has obtenido la certificación del curso {0}. ¡Enhorabuena!"
 
 #: frontend/src/pages/ProfileAbout.vue:150
+#, python-brace-format
 msgid "I am happy to announce that I earned the {0} badge on {1} at {2}"
 msgstr ""
 
@@ -4610,7 +4662,6 @@ msgstr "En Progreso"
 #. Option for the 'Send Notification for Published Courses' (Select) field in
 #. DocType 'LMS Settings'
 #. Option for the 'Send Notification for Published Batches' (Select) field in
-#. DocType 'LMS Settings'
 #: lms/lms/doctype/lms_settings/lms_settings.json
 msgid "In-app"
 msgstr ""
@@ -4667,6 +4718,7 @@ msgid "Install Frappe Learning"
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/RavenSetupRow.vue:77
+#, python-brace-format
 msgid "Install the {0} app to enable this integration."
 msgstr ""
 
@@ -4812,6 +4864,7 @@ msgid "Invalid violation events submitted."
 msgstr ""
 
 #: lms/lms/doctype/lms_quiz/lms_quiz.py:147
+#, python-brace-format
 msgid "Invalid {0} submitted."
 msgstr ""
 
@@ -5474,6 +5527,7 @@ msgid "Lesson not found"
 msgstr ""
 
 #: frontend/src/components/LockedLessonNotice.vue:97
+#, python-brace-format
 msgid "Lesson not found. Taking you to your current lesson in {0} seconds."
 msgstr ""
 
@@ -5688,6 +5742,7 @@ msgid "Manage your courses and batches at a glance"
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/RuleCondition.vue:220
+#, python-brace-format
 msgid "Managed by {0}"
 msgstr ""
 
@@ -5757,6 +5812,7 @@ msgid "Marks To Cut"
 msgstr ""
 
 #: lms/lms/doctype/lms_quiz_submission/lms_quiz_submission.py:51
+#, python-brace-format
 msgid "Marks for question number {0} cannot be greater than the marks allotted for that question."
 msgstr "La puntuación de la pregunta {0} no puede ser mayor que la puntuación asignada a esa pregunta."
 
@@ -5881,7 +5937,6 @@ msgstr ""
 #. Assignment'
 #. Label of the member_image (Attach Image) field in DocType 'LMS Batch
 #. Enrollment'
-#. Label of the member_image (Attach Image) field in DocType 'LMS Batch
 #. Feedback'
 #. Label of the member_image (Attach Image) field in DocType 'LMS Enrollment'
 #. Label of the member_image (Attach Image) field in DocType 'LMS Google Meet
@@ -5893,7 +5948,6 @@ msgstr ""
 #. Label of the member_image (Attach Image) field in DocType 'LMS Video Watch
 #. Duration'
 #. Label of the member_image (Attach Image) field in DocType 'LMS Zoom
-#. Settings'
 #: lms/lms/doctype/lms_badge_assignment/lms_badge_assignment.json
 #: lms/lms/doctype/lms_batch_enrollment/lms_batch_enrollment.json
 #: lms/lms/doctype/lms_batch_feedback/lms_batch_feedback.json
@@ -5982,6 +6036,7 @@ msgid "Member already enrolled in this batch"
 msgstr ""
 
 #: lms/lms/doctype/lms_badge_assignment/lms_badge_assignment.py:69
+#, python-brace-format
 msgid "Member does not meet the criteria for the badge {0}."
 msgstr ""
 
@@ -5992,10 +6047,12 @@ msgid "Member updated"
 msgstr ""
 
 #: lms/lms/api.py:1149
+#, python-brace-format
 msgid "Member {0} does not exist."
 msgstr ""
 
 #: lms/lms/doctype/lms_program/lms_program.py:42
+#, python-brace-format
 msgid "Member {0} has already been added to this program."
 msgstr ""
 
@@ -6189,6 +6246,7 @@ msgid "More actions"
 msgstr "Más acciones"
 
 #: frontend/src/components/Quiz/QuestionCard.vue:60
+#, python-brace-format
 msgid "More actions for question {0}"
 msgstr ""
 
@@ -6197,6 +6255,7 @@ msgid "More options"
 msgstr ""
 
 #: lms/patches/v2_0/backfill_lesson_assessment_placements.py:29
+#, python-brace-format
 msgid "More than {0} lessons still need assessment placement rows. Rewriting them inside the migrate transaction would exceed its budget. Run lms.patches.v2_0.backfill_lesson_assessment_placements.backfill_all as a background job, then re-run bench migrate."
 msgstr ""
 
@@ -6345,6 +6404,7 @@ msgid "New Workspace"
 msgstr "Nueva Área de Trabajo"
 
 #: lms/lms/utils.py:606
+#, python-brace-format
 msgid "New comment in batch {0}"
 msgstr "Nuevo comentario en el lote {0}"
 
@@ -6356,11 +6416,13 @@ msgid "New question"
 msgstr ""
 
 #: lms/lms/utils.py:597
+#, python-brace-format
 msgid "New reply on the topic {0} in course {1}"
 msgstr "Nueva respuesta en el tema {0} del curso {1}"
 
 #: frontend/src/components/Discussions.vue:11
 #: frontend/src/components/Discussions.vue:96
+#, python-brace-format
 msgid "New {0}"
 msgstr "Nuevo/a: {0}"
 
@@ -6477,6 +6539,7 @@ msgid "No file attached"
 msgstr "No hay archivos adjuntos"
 
 #: frontend/src/components/Modals/EditCoverImage.vue:72
+#, python-brace-format
 msgid "No images found for \"{0}\"."
 msgstr ""
 
@@ -6493,6 +6556,7 @@ msgid "No member of this workspace was added by a rule."
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/WorkspaceMembers.vue:226
+#, python-brace-format
 msgid "No member of {0} was added by a rule."
 msgstr ""
 
@@ -6573,19 +6637,23 @@ msgid "No unread notifications"
 msgstr ""
 
 #: lms/templates/course_list.html:13
+#, python-brace-format
 msgid "No {0}"
 msgstr "No {0}"
 
 #: frontend/src/components/Layouts/EmptyStateLayout.vue:40
 #: frontend/src/components/Layouts/pages/ListPage.vue:256
+#, python-brace-format
 msgid "No {0} Found"
 msgstr "Ningún {0} encontrado"
 
 #: frontend/src/components/Layouts/settings/desktop/SettingsList.vue:88
+#, python-brace-format
 msgid "No {0} match this filter"
 msgstr ""
 
 #: frontend/src/components/Layouts/settings/desktop/SettingsList.vue:87
+#, python-brace-format
 msgid "No {0} match {1}"
 msgstr ""
 
@@ -6594,6 +6662,7 @@ msgid "Nobody is in a channel of this workspace yet."
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/WorkspaceMembers.vue:231
+#, python-brace-format
 msgid "Nobody is in {0} anymore."
 msgstr ""
 
@@ -6793,6 +6862,7 @@ msgid "Only document file of type .doc or .docx are allowed."
 msgstr ""
 
 #: lms/templates/assignment.html:6
+#, python-brace-format
 msgid "Only files of type {0} will be accepted."
 msgstr "Solo se aceptarán archivos de tipo {0}."
 
@@ -6825,6 +6895,7 @@ msgid "Only zip files are allowed"
 msgstr ""
 
 #: frontend/src/utils/index.js:732
+#, python-brace-format
 msgid "Only {0} file is allowed."
 msgstr ""
 
@@ -6943,14 +7014,17 @@ msgstr "Opción 9"
 
 #: frontend/src/components/Quiz/QuestionAnswers.vue:38
 #: frontend/src/components/Quiz/QuestionAnswers.vue:39
+#, python-brace-format
 msgid "Option {0}"
 msgstr ""
 
 #: frontend/src/components/Quiz/QuestionAnswers.vue:23
+#, python-brace-format
 msgid "Option {0} is a correct answer"
 msgstr ""
 
 #: frontend/src/components/Quiz/QuestionAnswers.vue:12
+#, python-brace-format
 msgid "Option {0} is the correct answer"
 msgstr ""
 
@@ -7315,6 +7389,7 @@ msgid "Please accept the terms to continue."
 msgstr ""
 
 #: lms/lms/doctype/lms_settings/lms_settings.py:43
+#, python-brace-format
 msgid "Please add <a href='{0}'>{1}</a> for <a href='{2}'>{3}</a> to send calendar invites for evaluations."
 msgstr "Añade <a href='{0}'>{1}</a> para <a href='{2}'>{3}</a> para enviar invitaciones de calendario para las evaluaciones."
 
@@ -7383,14 +7458,17 @@ msgid "Please enter a valid timestamp"
 msgstr ""
 
 #: frontend/src/pages/Forms/ProfileEditForm.vue:171
+#, python-brace-format
 msgid "Please fill the mandatory fields: {0}"
 msgstr "Completa los campos obligatorios: {0}"
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:144
+#, python-brace-format
 msgid "Please install the Payments App to create a paid batch. Refer to the documentation for more details. {0}"
 msgstr ""
 
 #: lms/lms/doctype/lms_course/lms_course.py:73
+#, python-brace-format
 msgid "Please install the Payments App to create a paid course. Refer to the documentation for more details. {0}"
 msgstr ""
 
@@ -7526,6 +7604,7 @@ msgid "Please select your state."
 msgstr ""
 
 #: lms/templates/emails/job_report.html:6
+#, python-brace-format
 msgid "Please take appropriate action at {0}"
 msgstr "Toma las medidas oportunas en {0}"
 
@@ -7538,6 +7617,7 @@ msgid "Please upload an MP4, WebM, or OGG video. Formats like .MOV can't be play
 msgstr ""
 
 #: lms/lms/utils.py:565
+#, python-brace-format
 msgid "Please upload the file for {0} again. Only a file you uploaded can be attached."
 msgstr ""
 
@@ -7879,6 +7959,7 @@ msgid "Progress Summary"
 msgstr ""
 
 #: frontend/src/components/Programs/ProgramProgressSummary.vue:4
+#, python-brace-format
 msgid "Progress Summary for {0}"
 msgstr ""
 
@@ -8026,10 +8107,12 @@ msgid "Question updated successfully"
 msgstr "Pregunta actualizada correctamente"
 
 #: frontend/src/components/Quiz.vue:637
+#, python-brace-format
 msgid "Question {0}"
 msgstr "Pregunta {0}"
 
 #: frontend/src/components/Quiz.vue:286
+#, python-brace-format
 msgid "Question {0} of {1}"
 msgstr "Pregunta {0} de {1}"
 
@@ -8142,11 +8225,13 @@ msgid "Quizzes in this video"
 msgstr ""
 
 #: frontend/src/pages/QuizSubmission.vue:117
+#, python-brace-format
 msgid "Q{0}:"
 msgstr ""
 
 #: frontend/src/components/ProgrammingExercises/ExerciseConsole.vue:25
 #: frontend/src/components/ProgrammingExercises/ExerciseTestCases.vue:95
+#, python-brace-format
 msgid "Ran in {0}s"
 msgstr ""
 
@@ -8260,6 +8345,7 @@ msgid "Related Courses"
 msgstr "Cursos relacionados"
 
 #: frontend/src/components/Quiz.vue:1344
+#, python-brace-format
 msgid "Remaining: {0}"
 msgstr ""
 
@@ -8282,6 +8368,7 @@ msgid "Remove Highlight"
 msgstr ""
 
 #: frontend/src/components/Quiz/QuestionAnswers.vue:122
+#, python-brace-format
 msgid "Remove answer {0}"
 msgstr ""
 
@@ -8299,6 +8386,7 @@ msgid "Remove members?"
 msgstr ""
 
 #: frontend/src/components/Quiz/QuestionAnswers.vue:58
+#, python-brace-format
 msgid "Remove option {0}"
 msgstr ""
 
@@ -8312,6 +8400,7 @@ msgid "Remove row"
 msgstr ""
 
 #: frontend/src/components/Controls/ChildTable.vue:208
+#, python-brace-format
 msgid "Remove row {0}"
 msgstr ""
 
@@ -8328,10 +8417,12 @@ msgid "Remove video"
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/MassRemovalConfirmDialog.vue:105
+#, python-brace-format
 msgid "Remove {0} members"
 msgstr ""
 
 #: frontend/src/components/Settings/Sidebar/SidebarSettings.vue:276
+#, python-brace-format
 msgid "Reorder {0}"
 msgstr ""
 
@@ -8456,22 +8547,27 @@ msgid "Route"
 msgstr "Ruta"
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:201
+#, python-brace-format
 msgid "Row #{0} Date cannot be outside the batch duration."
 msgstr "Fila #{0}: la fecha no puede quedar fuera de la duración del lote."
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:197
+#, python-brace-format
 msgid "Row #{0} End time cannot be outside the batch duration."
 msgstr "Fila #{0}: la hora de fin no puede quedar fuera de la duración del lote."
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:181
+#, python-brace-format
 msgid "Row #{0} Start time cannot be greater than or equal to end time."
 msgstr "Fila #{0}: la hora de inicio no puede ser posterior o igual a la hora de fin."
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:190
+#, python-brace-format
 msgid "Row #{0} Start time cannot be outside the batch duration."
 msgstr "Fila #{0}: la hora de inicio no puede quedar fuera de la duración del lote."
 
 #: lms/lms/doctype/lms_quiz/lms_quiz.py:72
+#, python-brace-format
 msgid "Rows {0} have the duplicate questions."
 msgstr "Las filas {0} tienen preguntas duplicadas."
 
@@ -8845,7 +8941,7 @@ msgstr ""
 #: frontend/src/components/Controls/MultiLink.vue:73
 #: frontend/src/components/Controls/MultiLink.vue:76
 msgid "Select all"
-msgstr "Seleccionar todo"
+msgstr "Seleccionar todos"
 
 #: frontend/src/components/AssessmentPlugin.vue:40
 #: frontend/src/components/AssessmentPlugin.vue:48
@@ -8887,6 +8983,7 @@ msgid "Select video"
 msgstr ""
 
 #: frontend/src/components/ResponsiveListView.vue:436
+#, python-brace-format
 msgid "Select {0}"
 msgstr "Seleccionar {0}"
 
@@ -8920,6 +9017,7 @@ msgid "Send Email"
 msgstr "Enviar correo electronico"
 
 #: frontend/src/pages/JobApplications.vue:63
+#, python-brace-format
 msgid "Send Email to {0}"
 msgstr ""
 
@@ -9113,38 +9211,47 @@ msgid "Sidebar link updated"
 msgstr ""
 
 #: lms/lms/sidebar.py:193
+#, python-brace-format
 msgid "Sidebar row {0}: Home cannot be switched off. It is the page the app opens on."
 msgstr ""
 
 #: lms/lms/sidebar.py:204
+#, python-brace-format
 msgid "Sidebar row {0}: choose an icon for this link."
 msgstr ""
 
 #: lms/lms/sidebar.py:215
+#, python-brace-format
 msgid "Sidebar row {0}: choose the web page this link opens."
 msgstr ""
 
 #: lms/lms/sidebar.py:239
+#, python-brace-format
 msgid "Sidebar row {0}: enter the address this link opens."
 msgstr ""
 
 #: lms/lms/sidebar.py:225
+#, python-brace-format
 msgid "Sidebar row {0}: enter the path this link opens, for example /handbook."
 msgstr ""
 
 #: lms/lms/sidebar.py:241
+#, python-brace-format
 msgid "Sidebar row {0}: the address must begin with http:// or https://."
 msgstr ""
 
 #: lms/lms/sidebar.py:185
+#, python-brace-format
 msgid "Sidebar row {0}: the id {1} is already used by another row. Give this one another name."
 msgstr ""
 
 #: lms/lms/sidebar.py:231
+#, python-brace-format
 msgid "Sidebar row {0}: the path must begin with a single / and stay on this site. Use an External link to leave it."
 msgstr ""
 
 #: lms/lms/sidebar.py:209
+#, python-brace-format
 msgid "Sidebar row {0}: {1} is not a built-in link. Choose another type for it."
 msgstr ""
 
@@ -9568,22 +9675,19 @@ msgstr "Domingo"
 #. Description of the 'Courses (Deprecated)' (Check) field in DocType 'LMS
 #. Settings'
 #. Description of the 'Batches (Deprecated)' (Check) field in DocType 'LMS
-#. Settings'
 #. Description of the 'Jobs (Deprecated)' (Check) field in DocType 'LMS
-#. Settings'
 #. Description of the 'Statistics (Deprecated)' (Check) field in DocType 'LMS
-#. Settings'
 #. Description of the 'Notifications (Deprecated)' (Check) field in DocType
 #. 'LMS Settings'
 #. Description of the 'Programming Exercises (Deprecated)' (Check) field in
 #. DocType 'LMS Settings'
 #. Description of the 'Certifications (Deprecated)' (Check) field in DocType
-#. 'LMS Settings'
 #: lms/lms/doctype/lms_settings/lms_settings.json
 msgid "Superseded by Settings > Sidebar. No longer the source of truth."
 msgstr ""
 
 #: lms/lms/api.py:1750
+#, python-brace-format
 msgid "Suspicious pattern found in {0}: {1}"
 msgstr ""
 
@@ -9596,6 +9700,7 @@ msgid "Sync members into channels by rule."
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/WorkspaceChannels.vue:157
+#, python-brace-format
 msgid "Sync members of {0}"
 msgstr ""
 
@@ -9696,6 +9801,7 @@ msgid "Taught by"
 msgstr ""
 
 #: frontend/src/components/CourseCreatorCard.vue:141
+#, python-brace-format
 msgid "Taught by a team of {0}"
 msgstr ""
 
@@ -9793,10 +9899,12 @@ msgid "The address this payment is billed to."
 msgstr ""
 
 #: lms/lms/course_import_export.py:401
+#, python-brace-format
 msgid "The archive expands to more than {0} MB"
 msgstr ""
 
 #: lms/lms/course_import_export.py:398
+#, python-brace-format
 msgid "The archive has more than {0} files"
 msgstr ""
 
@@ -9813,14 +9921,17 @@ msgid "The code runner could not be loaded, so this exercise cannot be run."
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/MassRemovalConfirmDialog.vue:81
+#, python-brace-format
 msgid "The conditions on {0} could not be worked out, so there is no telling who this change adds or removes. It usually means the app that supplies a condition type is no longer installed. Saving applies the change anyway."
 msgstr ""
 
 #: lms/lms/payments.py:41
+#, python-brace-format
 msgid "The configured payment gateway {0} does not exist. Please contact the administrator."
 msgstr ""
 
 #: lms/lms/utils.py:2791
+#, python-brace-format
 msgid "The coupon code '{0}' is invalid."
 msgstr ""
 
@@ -9829,10 +9940,12 @@ msgid "The coupon this payment was discounted by."
 msgstr ""
 
 #: lms/templates/emails/lms_course_interest.html:5
+#, python-brace-format
 msgid "The course {0} is now available on {1}."
 msgstr "El curso {0} ya está disponible en {1}."
 
 #: lms/lms/course_import_export.py:957
+#, python-brace-format
 msgid "The course's assets exceed the maximum import size of {0} MB"
 msgstr ""
 
@@ -9849,10 +9962,12 @@ msgid "The deadline to schedule evaluations has passed. Please contact the Instr
 msgstr ""
 
 #: lms/lms/doctype/lms_certificate_request/lms_certificate_request.py:75
+#, python-brace-format
 msgid "The evaluator of this course is unavailable from {0} to {1}. Please select a date after {1}"
 msgstr "El evaluador de este curso no está disponible desde el {0} hasta el {1}. Selecciona una fecha posterior al {1}"
 
 #: lms/lms/doctype/lms_assignment_submission/lms_assignment_submission.py:147
+#, python-brace-format
 msgid "The instructor has left a comment on your assignment {0}"
 msgstr ""
 
@@ -9861,6 +9976,7 @@ msgid "The language this site falls back to."
 msgstr ""
 
 #: lms/templates/emails/batch_start_reminder_recorded.html:13
+#, python-brace-format
 msgid "The last day to schedule your evaluation is {0}."
 msgstr ""
 
@@ -9901,6 +10017,7 @@ msgid "The schedule for this quiz has ended."
 msgstr ""
 
 #: lms/lms/schedule_utils.py:74
+#, python-brace-format
 msgid "The schedule for {0} has ended."
 msgstr ""
 
@@ -9925,6 +10042,7 @@ msgid "The status of your application has changed."
 msgstr "El estado de tu solicitud ha cambiado."
 
 #: frontend/src/pages/LessonForm.vue:229
+#, python-brace-format
 msgid "The stored {0} of this lesson could not be read, so the editor is showing it as empty. It is left untouched and will not be overwritten; anything else you edit still saves. Reload the page; if it still fails, restore the lesson from its version history in Desk."
 msgstr "No se pudo leer el {0} guardado de esta lección, por eso el editor lo muestra vacío. El contenido se conserva y no se sobrescribirá; los demás cambios se guardarán normalmente. Recarga la página. Si el problema continúa, restaura la lección desde su historial de versiones en Desk."
 
@@ -9958,14 +10076,17 @@ msgid "There are no seats available in this batch."
 msgstr "No hay plazas disponibles en este lote."
 
 #: frontend/src/components/Layouts/EmptyStateLayout.vue:46
+#, python-brace-format
 msgid "There are no {0} currently. Keep an eye out, fresh learning experiences are on the way!"
 msgstr ""
 
 #: lms/templates/course_list.html:14
+#, python-brace-format
 msgid "There are no {0} on this site."
 msgstr "No hay {0} en este sitio."
 
 #: lms/lms/doctype/lms_quiz_submission/lms_quiz_submission.py:70
+#, python-brace-format
 msgid "There has been an update on your submission. You have got a score of {0} for the quiz {1}"
 msgstr ""
 
@@ -9984,6 +10105,7 @@ msgid "These customisations will work on the main batch page."
 msgstr "Estas personalizaciones se aplicarán en la página principal del lote."
 
 #: lms/lms/utils.py:1015 lms/lms/utils.py:1024
+#, python-brace-format
 msgid "These images come to more than {0} MB. Please send smaller ones."
 msgstr ""
 
@@ -10000,6 +10122,7 @@ msgid "This assignment"
 msgstr ""
 
 #: frontend/src/components/Assignment.vue:579
+#, python-brace-format
 msgid "This assignment opens on {0}."
 msgstr ""
 
@@ -10042,6 +10165,7 @@ msgid "This coupon has reached its maximum usage limit."
 msgstr ""
 
 #: lms/lms/utils.py:2832
+#, python-brace-format
 msgid "This coupon is not applicable to this {0}."
 msgstr ""
 
@@ -10062,6 +10186,7 @@ msgid "This deletes the workspace mapping and every channel mapping under it, wi
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/DeleteConfirmDialog.vue:7
+#, python-brace-format
 msgid "This deletes the {0} mapping and its membership rules, and stops syncing members. This cannot be undone."
 msgstr ""
 
@@ -10107,6 +10232,7 @@ msgid "This lesson is locked"
 msgstr ""
 
 #: frontend/src/components/LockedLessonNotice.vue:100
+#, python-brace-format
 msgid "This lesson is locked. Taking you to your current lesson in {0} seconds."
 msgstr ""
 
@@ -10127,6 +10253,7 @@ msgid "This member has not loaded yet"
 msgstr ""
 
 #: frontend/src/pages/Programs/ProgramEnrollment.vue:18
+#, python-brace-format
 msgid "This program consists of {0} courses"
 msgstr ""
 
@@ -10139,10 +10266,12 @@ msgid "This quiz has no questions available yet."
 msgstr ""
 
 #: frontend/src/components/Quiz.vue:1109
+#, python-brace-format
 msgid "This quiz opens on {0}."
 msgstr ""
 
 #: frontend/src/components/Quiz.vue:484
+#, python-brace-format
 msgid "This quiz was submitted automatically because you reached the maximum of {0} {1}. Reach out to your instructor if you need to try again."
 msgstr ""
 
@@ -10179,6 +10308,7 @@ msgid "This user cannot be deleted."
 msgstr ""
 
 #: frontend/src/components/VideoBlock.vue:5
+#, python-brace-format
 msgid "This video contains {0} {1}:"
 msgstr ""
 
@@ -10187,14 +10317,17 @@ msgid "This video's codec can't be played in browsers (e.g. HEVC/H.265). Please 
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/MassRemovalConfirmDialog.vue:85
+#, python-brace-format
 msgid "This will add {0} members to {1} and remove {2}. The removals cannot be undone. Cancel to keep the current membership."
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/MassRemovalConfirmDialog.vue:89
+#, python-brace-format
 msgid "This will add {0} members to {1}. Cancel to keep the current membership."
 msgstr ""
 
 #: frontend/src/components/Settings/Raven/MassRemovalConfirmDialog.vue:92
+#, python-brace-format
 msgid "This will remove {0} members from {1}. This cannot be undone."
 msgstr ""
 
@@ -10250,6 +10383,7 @@ msgid "Time: "
 msgstr "Hora: "
 
 #: frontend/src/pages/ProfileEvaluator.vue:11
+#, python-brace-format
 msgid "Times are in {0}"
 msgstr ""
 
@@ -10588,6 +10722,7 @@ msgid "Unknown error"
 msgstr ""
 
 #: lms/command_palette.py:61
+#, python-brace-format
 msgid "Unknown search category: {0}"
 msgstr ""
 
@@ -10763,6 +10898,7 @@ msgstr "Subiendo"
 #: frontend/src/components/Modals/JobApplicationModal.vue:46
 #: frontend/src/components/UploadPlugin.vue:14
 #: frontend/src/pages/Forms/ChapterForm.vue:111
+#, python-brace-format
 msgid "Uploading {0}%"
 msgstr "Subiendo {0} %"
 
@@ -10789,6 +10925,7 @@ msgid "Use HTML content for the email response"
 msgstr ""
 
 #: frontend/src/components/Quiz/QuestionEditor.vue:63
+#, python-brace-format
 msgid "Used in {0} quizzes"
 msgstr ""
 
@@ -10837,14 +10974,17 @@ msgid "User input"
 msgstr ""
 
 #: lms/lms/api.py:2300
+#, python-brace-format
 msgid "User {0} does not exist."
 msgstr "El usuario {0} no existe."
 
 #: lms/job/doctype/job_opportunity/job_opportunity.py:46
+#, python-brace-format
 msgid "User {0} has reported the job post {1}"
 msgstr "El usuario {0} ha denunciado la oferta de empleo {1}"
 
 #: lms/lms/api.py:2759
+#, python-brace-format
 msgid "User {0} not found"
 msgstr ""
 
@@ -10900,6 +11040,7 @@ msgid "Video preview"
 msgstr ""
 
 #: frontend/src/components/Modals/VideoStatistics.vue:237
+#, python-brace-format
 msgid "Video {0}"
 msgstr ""
 
@@ -10925,10 +11066,12 @@ msgid "View all reviews"
 msgstr ""
 
 #: frontend/src/components/CommandPalette/CommandPalette.vue:459
+#, python-brace-format
 msgid "View all {0}"
 msgstr ""
 
 #: frontend/src/pages/Home/Home.vue:14
+#, python-brace-format
 msgid "View learning streak: {0} days"
 msgstr ""
 
@@ -10964,6 +11107,7 @@ msgid "Visible"
 msgstr ""
 
 #: frontend/src/components/Settings/Sidebar/SidebarSettings.vue:279
+#, python-brace-format
 msgid "Visible: {0}"
 msgstr ""
 
@@ -11035,6 +11179,7 @@ msgid "Wednesday"
 msgstr "Miércoles"
 
 #: lms/templates/emails/lms_invite_request_approved.html:4
+#, python-brace-format
 msgid "Welcome to {0}!"
 msgstr "¡Te damos la bienvenida a {0}!"
 
@@ -11135,6 +11280,7 @@ msgid "Written response"
 msgstr ""
 
 #: frontend/src/components/Quiz.vue:1065
+#, python-brace-format
 msgid "Wrong answers deduct {0} {1}."
 msgstr ""
 
@@ -11155,6 +11301,7 @@ msgid "You"
 msgstr "Usted"
 
 #: lms/lms/doctype/lms_certificate_request/lms_certificate_request.py:116
+#, python-brace-format
 msgid "You already have an evaluation on {0} at {1} for the course {2}."
 msgstr "Ya tienes una evaluación el {0} a las {1} para el curso {2}."
 
@@ -11171,11 +11318,13 @@ msgid "You are already enrolled for this course."
 msgstr "Ya estás inscrito en este curso."
 
 #: lms/templates/signup-form.html:15
+#, python-brace-format
 msgid "You are already registered. {0} instead."
 msgstr ""
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:105
 #: lms/lms/doctype/lms_batch/lms_batch.py:118
+#, python-brace-format
 msgid "You are not authorized to add {0} to this batch."
 msgstr ""
 
@@ -11315,6 +11464,7 @@ msgid "You can only submit assignments for your own account."
 msgstr ""
 
 #: frontend/src/components/Assessment/AssignmentUploadPrompt.vue:12
+#, python-brace-format
 msgid "You can only upload {0} files"
 msgstr ""
 
@@ -11347,6 +11497,7 @@ msgid "You cannot grade your own submission."
 msgstr ""
 
 #: lms/lms/doctype/lms_certificate_request/lms_certificate_request.py:132
+#, python-brace-format
 msgid "You cannot schedule evaluations after {0}."
 msgstr "No puedes programar evaluaciones después del {0}."
 
@@ -11460,6 +11611,7 @@ msgid "You do not have permission to modify this role."
 msgstr ""
 
 #: lms/lms/permissions.py:738
+#, python-brace-format
 msgid "You do not have permission to move this row out of {0} {1}"
 msgstr ""
 
@@ -11488,7 +11640,7 @@ msgid "You don't have any notifications."
 msgstr "No tienes ninguna notificación."
 
 #: frontend/src/components/Quiz.vue:517
-#, python-format
+#, python-brace-format, python-format
 msgid "You got {0}% correct answers with a score of {1} out of {2}"
 msgstr "Has obtenido un {0} % de respuestas correctas con una puntuación de {1} sobre {2}"
 
@@ -11521,10 +11673,12 @@ msgid "You have been enrolled in this course"
 msgstr "Te has inscrito en este curso"
 
 #: lms/lms/doctype/lms_quiz_submission/lms_quiz_submission.py:40
+#, python-brace-format
 msgid "You have exceeded the maximum number of attempts ({0}) for this quiz"
 msgstr ""
 
 #: lms/lms/doctype/lms_quiz_submission/lms_quiz_submission.py:67
+#, python-brace-format
 msgid "You have got a score of {0} for the quiz {1}"
 msgstr ""
 
@@ -11545,18 +11699,22 @@ msgid "You have unsaved changes, leave anyway?"
 msgstr ""
 
 #: frontend/src/components/Quiz.vue:716
+#, python-brace-format
 msgid "You have {0} unattempted {1}. They will be marked incorrect if you submit."
 msgstr ""
 
 #: frontend/src/pages/Home/Home.vue:132 frontend/src/pages/Home/Home.vue:155
+#, python-brace-format
 msgid "You have {0} upcoming {1} and {2} {3} scheduled."
 msgstr ""
 
 #: frontend/src/pages/Home/Home.vue:139 frontend/src/pages/Home/Home.vue:162
+#, python-brace-format
 msgid "You have {0} upcoming {1}."
 msgstr ""
 
 #: frontend/src/pages/Home/Home.vue:144 frontend/src/pages/Home/Home.vue:167
+#, python-brace-format
 msgid "You have {0} {1} scheduled."
 msgstr ""
 
@@ -11597,6 +11755,7 @@ msgid "You're enrolled and all set! The course content is ready, so you can star
 msgstr ""
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:553
+#, python-brace-format
 msgid "You're enrolled in {0} – start whenever you're ready"
 msgstr ""
 
@@ -11609,6 +11768,7 @@ msgid "You've successfully submitted the assignment."
 msgstr "Has enviado la tarea correctamente."
 
 #: frontend/src/components/Quiz.vue:145
+#, python-brace-format
 msgid "You've used all {0} {1} for this quiz. Reach out to your instructor if you need to try again."
 msgstr "Has agotado {0} {1} de este cuestionario. Ponte en contacto con tu instructor si necesitas volver a intentarlo."
 
@@ -11644,6 +11804,7 @@ msgid "Your application has been submitted successfully"
 msgstr ""
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:550
+#, python-brace-format
 msgid "Your batch {0} is starting tomorrow"
 msgstr ""
 
@@ -11656,6 +11817,7 @@ msgid "Your calendar is set."
 msgstr "Tu calendario está configurado."
 
 #: lms/lms/doctype/lms_live_class/lms_live_class.py:176
+#, python-brace-format
 msgid "Your class on {0} is today"
 msgstr ""
 
@@ -11665,6 +11827,7 @@ msgstr ""
 
 #: lms/lms/notification/certificate_request_reminder/certificate_request_reminder.html:3
 #: lms/templates/emails/certificate_request_notification.html:3
+#, python-brace-format
 msgid "Your evaluation for the course {0} has been scheduled on {1} at {2} {3}."
 msgstr "Tu evaluación del curso {0} se ha programado para el {1} a las {2} {3}."
 
@@ -11673,6 +11836,7 @@ msgid "Your evaluation slot has been booked"
 msgstr "Se ha reservado tu franja horaria de evaluación"
 
 #: lms/templates/emails/certificate_request_notification.html:5
+#, python-brace-format
 msgid "Your evaluator is {0}"
 msgstr "Tu evaluador es {0}"
 
@@ -11728,6 +11892,7 @@ msgid "and then 'Add to Home Screen'"
 msgstr ""
 
 #: frontend/src/components/Layouts/settings/desktop/SettingsTable.vue:254
+#, python-brace-format
 msgid "and {0} more: {1}"
 msgstr ""
 
@@ -11744,6 +11909,7 @@ msgid "applicants"
 msgstr ""
 
 #: frontend/src/components/VideoBlock.vue:19
+#, python-brace-format
 msgid "at {0} minutes"
 msgstr ""
 
@@ -12117,253 +12283,313 @@ msgid "you can"
 msgstr "puedes"
 
 #: frontend/src/pages/Assignments.vue:4
+#, python-brace-format
 msgid "{0} Assignments"
 msgstr ""
 
 #: frontend/src/pages/ProgrammingExercises/ProgrammingExercises.vue:4
+#, python-brace-format
 msgid "{0} Exercises"
 msgstr ""
 
 #: frontend/src/pages/Quizzes.vue:17
+#, python-brace-format
 msgid "{0} Quizzes"
 msgstr ""
 
 #: lms/lms/api.py:1346 lms/lms/api.py:1354
+#, python-brace-format
 msgid "{0} Settings not found"
 msgstr "No se ha encontrado la configuración de {0}"
 
 #: frontend/src/pages/Forms/QuizForm.vue:953
+#, python-brace-format
 msgid "{0} Your changes are not saved. Do not close this tab until they are."
 msgstr ""
 
 #: lms/lms/api.py:720 lms/lms/api.py:746
+#, python-brace-format
 msgid "{0} cannot be changed."
 msgstr ""
 
 #: lms/templates/emails/job_application.html:2
+#, python-brace-format
 msgid "{0} has applied for the job position {1}"
 msgstr "{0} ha solicitado el puesto {1}"
 
 #: lms/lms/api.py:629
+#, python-brace-format
 msgid "{0} has no availability set up yet."
 msgstr ""
 
 #: lms/lms/doctype/lms_batch/lms_batch.py:287
+#, python-brace-format
 msgid "{0} has published a new batch {1}"
 msgstr ""
 
 #: lms/lms/doctype/lms_course/lms_course.py:211
+#, python-brace-format
 msgid "{0} has published a new course {1}"
 msgstr ""
 
 #: lms/templates/emails/job_report.html:4
+#, python-brace-format
 msgid "{0} has reported a job post for the following reason."
 msgstr "{0} ha denunciado una oferta de empleo por el siguiente motivo."
 
 #: lms/templates/emails/assignment_submission.html:2
+#, python-brace-format
 msgid "{0} has submitted the assignment {1}"
 msgstr "{0} ha enviado la tarea {1}"
 
 #: frontend/src/components/Settings/EmailAccount/EmailAccountForm.vue:27
 #: frontend/src/components/Settings/EmailAccount/EmailProviderPicker.vue:15
+#, python-brace-format
 msgid "{0} icon"
 msgstr ""
 
 #: lms/lms/course_import_export.py:406
+#, python-brace-format
 msgid "{0} in the archive is compressed too heavily to extract safely"
 msgstr ""
 
 #: lms/lms/course_import_export.py:417
+#, python-brace-format
 msgid "{0} in the archive is too large to import"
 msgstr ""
 
 #: lms/lms/doctype/lms_course_mentor_mapping/lms_course_mentor_mapping.py:15
+#, python-brace-format
 msgid "{0} is already a mentor for course {1}"
 msgstr "{0} ya es mentor del curso {1}"
 
 #: lms/lms/doctype/lms_certificate/lms_certificate.py:140
+#, python-brace-format
 msgid "{0} is already certified for the batch {1}"
 msgstr ""
 
 #: lms/lms/doctype/lms_certificate/lms_certificate.py:121
+#, python-brace-format
 msgid "{0} is already certified for the course {1}"
 msgstr "{0} ya está certificado para el curso {1}"
 
 #: lms/lms/doctype/lms_enrollment/lms_enrollment.py:225
+#, python-brace-format
 msgid "{0} is not a field on LMS Enrollment"
 msgstr ""
 
 #: lms/lms/api.py:908
+#, python-brace-format
 msgid "{0} is not a published web page."
 msgstr ""
 
 #: lms/lms/api.py:674
+#, python-brace-format
 msgid "{0} is not a valid date."
 msgstr ""
 
 #: lms/lms/api.py:700 lms/lms/api.py:724
+#, python-brace-format
 msgid "{0} is not a valid day."
 msgstr ""
 
 #: lms/lms/api.py:3422
+#, python-brace-format
 msgid "{0} is not a valid language"
 msgstr ""
 
 #: lms/lms/api.py:657
+#, python-brace-format
 msgid "{0} is not a valid time."
 msgstr ""
 
 #: lms/lms/api.py:3427
+#, python-brace-format
 msgid "{0} is not a valid timezone"
 msgstr ""
 
 #: lms/lms/email_account.py:302
+#, python-brace-format
 msgid "{0} is required"
 msgstr "{0} es requerido"
 
 #: lms/lms/notification/certificate_request_reminder/certificate_request_reminder.html:5
+#, python-brace-format
 msgid "{0} is your evaluator"
 msgstr "{0} es tu evaluador"
 
 #: frontend/src/components/Assessment/QuizStats.vue:48
+#, python-brace-format
 msgid "{0} left"
 msgstr ""
 
 #: frontend/src/utils/quizQuestion.js:95
+#, python-brace-format
 msgid "{0} marks"
 msgstr ""
 
 #: lms/lms/utils.py:699
+#, python-brace-format
 msgid "{0} mentioned you in a comment"
 msgstr "{0} te ha mencionado en un comentario"
 
 #: lms/templates/emails/mention_template.html:2
+#, python-brace-format
 msgid "{0} mentioned you in a comment in your batch."
 msgstr "{0} te ha mencionado en un comentario en tu lote."
 
 #: lms/lms/utils.py:652 lms/lms/utils.py:658
+#, python-brace-format
 msgid "{0} mentioned you in a comment in {1}"
 msgstr "{0} te ha mencionado en un comentario en {1}"
 
 #: lms/lms/email_account.py:330
+#, python-brace-format
 msgid "{0} must be 0 or 1"
 msgstr ""
 
 #: lms/lms/email_account.py:181
+#, python-brace-format
 msgid "{0} must be a port number"
 msgstr ""
 
 #: lms/lms/email_account.py:183
+#, python-brace-format
 msgid "{0} must be a port number between 1 and 65535"
 msgstr ""
 
 #: lms/lms/email_account.py:168 lms/lms/email_account.py:299
 #: lms/lms/email_account.py:376 lms/lms/email_account.py:398
+#, python-brace-format
 msgid "{0} must be a string"
 msgstr ""
 
 #: lms/lms/api.py:1408
+#, python-brace-format
 msgid "{0} not found"
 msgstr "{0} no encontrado"
 
 #: frontend/src/components/ProgrammingExercises/ExerciseTestCases.vue:13
 #: frontend/src/components/ProgrammingExercises/ExerciseWorkspace.vue:141
+#, python-brace-format
 msgid "{0} of {1} passed"
 msgstr ""
 
 #: frontend/src/pages/Questions.vue:252
+#, python-brace-format
 msgid "{0} of {1} questions deleted; the rest remain selected: {2}"
 msgstr ""
 
 #: frontend/src/pages/Quizzes.vue:168
+#, python-brace-format
 msgid "{0} of {1} quizzes deleted; the rest remain selected: {2}"
 msgstr ""
 
 #: frontend/src/components/Submissions/SubmissionsPage.vue:277
 #: frontend/src/pages/QuizSubmissions.vue:174
+#, python-brace-format
 msgid "{0} of {1} submissions could not be deleted: {2}"
 msgstr ""
 
 #: lms/lms/schedule_utils.py:70
+#, python-brace-format
 msgid "{0} opens on {1}."
 msgstr ""
 
 #: frontend/src/pages/Questions.vue:245
+#, python-brace-format
 msgid "{0} questions deleted successfully"
 msgstr ""
 
 #: frontend/src/pages/Quizzes.vue:161
+#, python-brace-format
 msgid "{0} quizzes deleted successfully"
 msgstr ""
 
 #: frontend/src/components/Discussions.vue:52
+#, python-brace-format
 msgid "{0} replies"
 msgstr ""
 
 #: frontend/src/components/Discussions.vue:51
+#, python-brace-format
 msgid "{0} reply"
 msgstr ""
 
 #: frontend/src/components/Layouts/pages/ListPage.vue:261
+#, python-brace-format
 msgid "{0} results loaded"
 msgstr ""
 
 #: frontend/src/components/ResponsiveListView.vue:349
+#, python-brace-format
 msgid "{0} rows selected"
 msgstr "{0} filas seleccionadas"
 
 #: frontend/src/components/Modals/EvaluationModal.vue:205
+#, python-brace-format
 msgid "{0} until {1} on {2}"
 msgstr ""
 
 #: frontend/src/pages/Jobs.vue:4
+#, python-brace-format
 msgid "{0} {1} Jobs"
 msgstr ""
 
 #: frontend/src/components/Assessment/AssessmentBlockPreview.vue:23
+#, python-brace-format
 msgid "{0} {1} could not be loaded."
 msgstr ""
 
 #: frontend/src/components/Controls/ChildTable.vue:211
+#, python-brace-format
 msgid "{0}, row {1}"
 msgstr "{0}, fila {1}"
 
 #: lms/lms/doctype/lms_enrollment/lms_enrollment.py:131
+#, python-brace-format
 msgid "{0}: {1} cannot be changed from {2} to {3} after enrollment."
 msgstr ""
 
 #: frontend/src/components/LockedLessonNotice.vue:28
 #: frontend/src/components/ProgrammingExercises/ExerciseTestCases.vue:42
+#, python-brace-format
 msgid "{0}s"
 msgstr "{0}s"
 
 #. Count format of shortcut in the Learning Workspace
 #: lms/lms/workspace/learning/learning.json
+#, python-brace-format
 msgid "{} Active"
 msgstr ""
 
 #. Count format of shortcut in the Learning Workspace
 #: lms/lms/workspace/learning/learning.json
+#, python-brace-format
 msgid "{} Completed"
 msgstr "{} completados"
 
 #. Count format of shortcut in the Learning Workspace
 #: lms/lms/workspace/learning/learning.json
+#, python-brace-format
 msgid "{} Enrolled"
 msgstr "{} inscritos"
 
 #. Count format of shortcut in the Learning Workspace
 #: lms/lms/workspace/learning/learning.json
+#, python-brace-format
 msgid "{} Granted"
 msgstr "{} concedidos"
 
 #. Count format of shortcut in the Learning Workspace
 #: lms/lms/workspace/learning/learning.json
+#, python-brace-format
 msgid "{} Passed"
 msgstr "{} aprobados"
 
 #. Count format of shortcut in the Learning Workspace
 #: lms/lms/workspace/learning/learning.json
+#, python-brace-format
 msgid "{} Published"
 msgstr ""
 

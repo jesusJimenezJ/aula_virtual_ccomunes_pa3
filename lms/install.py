@@ -26,7 +26,6 @@ def after_sync():
 	seed_sidebar_items()
 	create_lms_roles()
 	set_default_certificate_print_format()
-	give_lms_roles_to_admin()
 
 
 def before_uninstall():

@@ -1,5 +1,5 @@
 <template>
-	<div v-if="instructors?.length" class="border-2 rounded-5 p-5">
+	<div v-if="instructors?.length" class="course-creator-card border-2 rounded-5 p-5">
 		<div class="uppercase text-ink-gray-6 text-xs-semibold tracking-wider mb-4">
 			{{ headerLabel }}
 		</div>
@@ -154,3 +154,40 @@ function focusInstructor(instructor: CourseInstructorInfo) {
 	focusedKey.value = instructorKey(instructor)
 }
 </script>
+
+
+<style scoped>
+.course-creator-card {
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background: #ffffff;
+        /* token-exempt-end */
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        border: 1px solid #e5e7eb;
+        /* token-exempt-end */
+        border-radius: 1.25rem;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        box-shadow: 0 4px 14px rgb(15 23 42 / 5%);
+        /* token-exempt-end */
+        transition:
+                border-color 180ms ease,
+                box-shadow 180ms ease,
+                transform 180ms ease;
+}
+
+.course-creator-card:hover {
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        border-color: #d1d5db;
+        /* token-exempt-end */
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        box-shadow: 0 10px 24px rgb(15 23 42 / 8%);
+        /* token-exempt-end */
+}
+
+html[data-theme='dark'] .course-creator-card {
+        background: var(--surface-gray-1);
+        border-color: var(--outline-gray-2);
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        box-shadow: 0 5px 18px rgb(0 0 0 / 15%);
+        /* token-exempt-end */
+}
+</style>

@@ -129,7 +129,7 @@ export function buildSidebarRows(
 	const groups = groupIndexes(links)
 	// Sprint 1 navigation: course access and catalog search. Keep other routes
 	// in the codebase for later sprints, but don't advertise them in this UI.
-	const sprintOneLabels = new Set(['Inicio', 'Buscar', 'Cursos'])
+	const sprintOneLabels = new Set(['Inicio', 'Cursos'])
 
 	// Built-ins render in getSidebarItems() order, always. A row decides only
 	// whether one shows, through `isLinkEnabled`, never where it sits. This

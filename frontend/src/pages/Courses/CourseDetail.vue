@@ -445,4 +445,21 @@ usePageMeta(() => {
 .course-management :deep([role='tab'][aria-selected='true']) {
 	color: var(--ink-green-7);
 }
+
+/* COURSE-FORM-CENTERING-V1 */
+/* El panel de la pestaña debe ocupar todo el espacio disponible. */
+.course-management :deep(.detail-tabs) {
+    width: 100%;
+    min-width: 0;
+}
+
+.course-management :deep([role='tabpanel'][data-state='active']) {
+    width: 100%;
+    max-width: none;
+    align-self: stretch;
+    min-width: 0;
+}
+
+/* END COURSE-FORM-CENTERING-V1 */
+
 </style>

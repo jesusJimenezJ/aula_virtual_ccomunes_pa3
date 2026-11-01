@@ -3,7 +3,7 @@
 		:title="formTitle"
 		show-back
 		:unsaved="isDirty"
-		:save-label="refusal ? undefined : __('Save')"
+		:save-label="refusal ? undefined : __('Guardar')"
 		:saving="saving"
 		:can-save="isDirty"
 		save-testid="member-save"
@@ -23,7 +23,7 @@
 			<div class="grid grid-cols-2 gap-4">
 				<FormControl
 					v-model="member.first_name"
-					:label="__('First Name')"
+					:label="__('Nombres')"
 					type="text"
 					placeholder="Ada"
 					required
@@ -31,14 +31,14 @@
 				/>
 				<FormControl
 					v-model="member.last_name"
-					:label="__('Last Name')"
+					:label="__('Apellidos')"
 					type="text"
 					placeholder="Lovelace"
 					autocomplete="off"
 				/>
 				<FormControl
 					v-model="member.email"
-					:label="__('Email')"
+					:label="__('Correo electrónico')"
 					type="email"
 					placeholder="ada@example.com"
 					:disabled="isEdit"
@@ -47,46 +47,46 @@
 				/>
 				<FormControl
 					v-model="member.username"
-					:label="__('Username')"
+					:label="__('Nombre de usuario')"
 					type="text"
 					placeholder="ada"
 					autocomplete="off"
 				/>
 				<FormControl
 					v-model="member.phone"
-					:label="__('Phone')"
+					:label="__('Teléfono')"
 					type="text"
-					placeholder="+44 20 7946 0958"
+					placeholder="+51 1 234 5678"
 					autocomplete="off"
 				/>
 				<FormControl
 					v-model="member.mobile_no"
-					:label="__('Mobile No')"
+					:label="__('Celular')"
 					type="text"
-					placeholder="+44 7700 900123"
+					placeholder="+51 999 999 999"
 					autocomplete="off"
 				/>
 				<FormControl
 					v-model="member.location"
-					:label="__('Location')"
+					:label="__('Ubicación')"
 					type="text"
-					placeholder="London"
+					placeholder="Lima"
 					autocomplete="off"
 				/>
 			</div>
 
 			<FormControl
 				v-model="member.bio"
-				:label="__('Bio')"
+				:label="__('Biografía')"
 				type="textarea"
 				:rows="3"
-				:placeholder="__('A line or two about this person')"
+				:placeholder="__('Escribe una breve descripción de esta persona')"
 				autocomplete="off"
 			/>
 
 			<div class="h-px border-t border-outline-elevation-2" />
 
-			<div class="text-p-lg-semibold text-ink-gray-8">{{ __('Roles') }}</div>
+			<div class="text-p-lg-semibold text-ink-gray-8">{{ __('Perfiles') }}</div>
 
 			<RoleSwitches
 				:model-value="roles"
@@ -144,19 +144,20 @@ const isEdit = computed(
 )
 
 const formTitle = computed(() => {
-	if (!isEdit.value) return __('Add New Member')
-	return props.row?.full_name || __('Edit Member')
+	if (!isEdit.value) return __('Agregar nuevo usuario')
+	return props.row?.full_name || __('Editar usuario')
 })
 
-// The settings surface is gated already (UserDropdown.vue), but this form is
-// one click away from a list a deep link opens. `is_moderator` alone,
-// deliberately: get_members and save_role both `frappe.only_for("Moderator")`.
-// This is a UX gate, not the authorization boundary; those only_for calls are.
+// The backend independently validates member-management permissions.
 const refusal = computed(() => {
 	if ((window as Window & { read_only_mode?: boolean }).read_only_mode)
-		return __('This site is in read-only mode.')
-	if (!user.data?.is_moderator)
-		return __('You are not permitted to manage members.')
+		return __('El sitio está en modo de solo lectura.')
+	if (
+        !user.data?.is_moderator &&
+        !user.data?.is_system_manager &&
+        !user.data?.is_administrator
+    )
+		return __('No tienes permiso para administrar usuarios.')
 	return ''
 })
 
@@ -201,10 +202,10 @@ const memberFetch = createResource({
 // saying no.
 const validate = (): string => {
 	const doc = member.value
-	if (!doc) return __('This member has not loaded yet')
+	if (!doc) return __('El usuario todavía no se ha cargado')
 	if (!isEdit.value && !String(doc.email ?? '').trim())
-		return __('Email is required')
-	if (!String(doc.first_name ?? '').trim()) return __('First Name is required')
+		return __('El correo electrónico es obligatorio')
+	if (!String(doc.first_name ?? '').trim()) return __('Los nombres son obligatorios')
 	return ''
 }
 
@@ -249,7 +250,7 @@ const save = () => {
 				capture('user_added')
 			}
 		},
-		success: creating ? __('Member added successfully') : __('Member updated'),
+		success: creating ? __('Usuario agregado correctamente') : __('Usuario actualizado correctamente'),
 		after: () => {
 			notifyMembersChanged()
 			emit('back')
@@ -257,7 +258,7 @@ const save = () => {
 		failure: (error: any) =>
 			memberError(
 				error,
-				creating ? __('Unable to add member') : __('Unable to update user')
+				creating ? __('No se pudo agregar el usuario') : __('No se pudo actualizar el usuario')
 			),
 	})
 }

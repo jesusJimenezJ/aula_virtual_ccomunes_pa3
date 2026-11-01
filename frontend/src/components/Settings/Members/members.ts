@@ -23,18 +23,19 @@ export const MEMBERS_METHOD = 'lms.lms.api.get_members'
 // and delete_member removes them.
 export const MEMBERS_DOCTYPE = 'User'
 
-// The raw role names get_members returns, and what a badge calls them. Only
-// these four are shown: member_roles() returns LMS_ROLES, and a role outside
-// this map is not one of them.
+
+/**
+ * Perfiles funcionales definidos por el Sprint 1.
+ * Los nombres técnicos corresponden a roles existentes de Frappe.
+ */
 const ROLE_LABELS: Record<string, () => string> = {
-	'LMS Student': () => __('Student'),
-	'Course Creator': () => __('Instructor'),
-	Moderator: () => __('Moderator'),
-	'Batch Evaluator': () => __('Evaluator'),
+	'LMS Student': () => __('Estudiante'),
+	'Course Creator': () => __('Docente'),
+	Moderator: () => __('Personal de soporte'),
 }
 
 export const roleOptions = (): SelectOption[] => [
-	{ label: __('All'), value: 'All' },
+	{ label: __('Todos'), value: 'All' },
 	...Object.entries(ROLE_LABELS).map(([value, label]) => ({
 		label: label(),
 		value,
@@ -42,34 +43,27 @@ export const roleOptions = (): SelectOption[] => [
 ]
 
 /**
- * The four roles the form grants, in order. `role` is the server's name
- * (`lms.lms.api.save_role` takes it); `label` is what the row reads. Course
- * Creator keeps its own name here, not the badge's "Instructor".
+ * Los tres perfiles funcionales que se muestran en la administración.
+ * Batch Evaluator se conserva como rol técnico interno y no se expone aquí.
  */
 export const ROLE_ROWS = [
 	{
 		key: 'lms_student',
 		role: 'LMS Student',
-		label: () => __('Student'),
-		description: () => __('Learn courses and track progress'),
+		label: () => __('Estudiante'),
+		description: () => __('Accede a cursos y realiza actividades académicas'),
 	},
 	{
 		key: 'course_creator',
 		role: 'Course Creator',
-		label: () => __('Course Creator'),
-		description: () => __('Build and manage courses, chapters, and lessons'),
-	},
-	{
-		key: 'batch_evaluator',
-		role: 'Batch Evaluator',
-		label: () => __('Evaluator'),
-		description: () => __('Manage batches, review and grade submissions'),
+		label: () => __('Docente'),
+		description: () => __('Gestiona cursos, contenidos y actividades académicas'),
 	},
 	{
 		key: 'moderator',
 		role: 'Moderator',
-		label: () => __('Moderator'),
-		description: () => __('Oversee all users, content, and system settings'),
+		label: () => __('Personal de soporte'),
+		description: () => __('Administra el aula virtual según sus permisos'),
 	},
 ] as const
 
@@ -80,15 +74,21 @@ export type MemberRoles = Record<MemberRoleKey, boolean>
 export const noRoles = (): MemberRoles => ({
 	lms_student: false,
 	course_creator: false,
-	batch_evaluator: false,
 	moderator: false,
 })
 
-/** The four switches, as the server would name them. */
+/**
+ * Convierte los roles técnicos de Frappe en perfiles visibles.
+ * Los roles adicionales no se modifican.
+ */
 export const rolesFrom = (granted: string[] | undefined): MemberRoles => {
 	const held = granted ?? []
 	const roles = noRoles()
-	for (const row of ROLE_ROWS) roles[row.key] = held.includes(row.role)
+
+	for (const row of ROLE_ROWS) {
+		roles[row.key] = held.includes(row.role)
+	}
+
 	return roles
 }
 
@@ -103,7 +103,7 @@ export const memberColumns = (
 ): SettingsListColumn[] => [
 	{
 		key: 'member',
-		label: __('User'),
+		label: __('Usuario'),
 		type: 'stacked',
 		primary: (row) => row.full_name,
 		secondary: (row) => row.name,
@@ -111,7 +111,7 @@ export const memberColumns = (
 	},
 	{
 		key: 'roles',
-		label: __('Roles'),
+		label: __('Perfiles'),
 		type: 'badge',
 		badges: (row) =>
 			((row.roles || []) as string[])
@@ -124,17 +124,17 @@ export const memberColumns = (
 	{
 		key: 'actions',
 		type: 'actions',
-		ariaLabel: (row) => __('Actions for {0}').format(row.full_name),
+		ariaLabel: (row) => __('Acciones para {0}').format(row.full_name),
 		// Editing is what a row click does now, so the menu carries the two
 		// things a click cannot: the person's public profile, and deletion.
 		options: (row) => [
 			{
-				label: __('Go to Profile'),
+				label: __('Ir al perfil'),
 				icon: 'lucide-user',
 				onClick: () => actions.profile(row),
 			},
 			{
-				label: __('Delete user'),
+				label: __('Eliminar usuario'),
 				icon: 'lucide-trash-2',
 				theme: 'red',
 				onClick: () => actions.remove(row),
@@ -159,11 +159,11 @@ const removeMember = (
 	call('lms.lms.api.delete_member', { user: row.name })
 		.then(() => {
 			if (typeof close === 'function') close()
-			toast.success(__('User deleted'))
+			toast.success(__('Usuario eliminado correctamente'))
 			onDeleted()
 		})
 		.catch((error: FrappeResourceError) => {
-			toast.error(memberError(error, __('Unable to delete user')))
+			toast.error(memberError(error, __('No se pudo eliminar el usuario')))
 			console.error(error)
 		})
 
@@ -175,14 +175,14 @@ export const confirmMemberDeletion = (
 	onDeleted: () => void
 ) => {
 	createDialog({
-		title: __('Delete {0}?').format(row.full_name),
+		title: __('¿Eliminar a {0}?').format(row.full_name),
 		message: __(
-			'This permanently deletes the user account and cannot be undone.'
+			'Esta acción eliminará permanentemente la cuenta y no se podrá deshacer.'
 		),
 		size: 'sm',
 		actions: [
 			{
-				label: __('Delete'),
+				label: __('Eliminar'),
 				theme: 'red',
 				variant: 'solid',
 				onClick({ close }: { close: () => void }) {

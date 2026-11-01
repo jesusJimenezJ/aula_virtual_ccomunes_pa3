@@ -229,7 +229,7 @@
 							variant="outline"
 							:onCreate="
 								(value, close) => {
-									openSettings('zoom', close)
+									openSettings('zoom', close ?? null)
 								}
 							"
 						/>
@@ -241,7 +241,7 @@
 							variant="outline"
 							:onCreate="
 								(value, close) => {
-									openSettings('google-meet', close)
+									openSettings('google-meet', close ?? null)
 								}
 							"
 						/>
@@ -267,7 +267,7 @@
 							variant="outline"
 						/>
 						<Uploader
-							v-model="batchDetail.doc.meta_image"
+							v-model="metaImage"
 							:label="__('Meta Image')"
 							type="image"
 							:required="false"
@@ -368,9 +368,7 @@ const user = inject<SessionUser>('$user')!
 const instructors = ref<string[]>([])
 const dateFormat = getDateFormat()
 const app = getCurrentInstance()!
-const { $dialog } = app.appContext.config.globalProperties as {
-	$dialog: DialogFn
-}
+const $dialog = app.appContext.config.globalProperties.$dialog as DialogFn
 const isDirty = ref<boolean>(false)
 const originalDoc = ref<LMSBatch | null>(null)
 const { inputId: batchDetailsId, labelId: batchDetailsLabelId } =
@@ -378,11 +376,11 @@ const { inputId: batchDetailsId, labelId: batchDetailsLabelId } =
 const showMemberModal = ref<boolean>(false)
 const emailTemplateLinkRef = ref<{ reload: () => void } | null>(null)
 
-const batchDetail = createDocumentResource({
-	doctype: 'LMS Batch',
-	name: props.batch.data?.name,
-	auto: true,
-}) as Resource<LMSBatch | null>
+const batchDetail = createDocumentResource<LMSBatch>({
+    doctype: 'LMS Batch',
+    name: props.batch.data?.name ?? '',
+    auto: true,
+})
 
 const openEmailTemplateForm = (): void => {
 	openBatchForm(
@@ -416,17 +414,25 @@ const updateBatchDetails = (value: string): void => {
 	if (batchDetail.doc) batchDetail.doc.batch_details = value
 }
 
-const createCategory = (name: string, done: () => void): void => {
-	createLMSCategory(name).then((categoryName: string | null) => {
-		if (!categoryName) return
-		if (batchDetail.doc) batchDetail.doc.category = categoryName
-		done()
-	})
+const createCategory = (name: string | null, done?: () => void): void => {
+    if (!name) return
+    createLMSCategory(name).then((categoryName: string | null) => {
+        if (!categoryName) return
+        if (batchDetail.doc) batchDetail.doc.category = categoryName
+        done?.()
+    })
 }
 
 const onInstructorCreated = (createdUser: { name: string }): void => {
 	instructors.value = [...instructors.value, createdUser.name]
 }
+
+const metaImage = computed({
+    get: () => batchDetail.doc?.meta_image ?? null,
+    set: (value: string) => {
+        if (batchDetail.doc) batchDetail.doc.meta_image = value
+    },
+})
 
 const meta = reactive<{ description: string; keywords: string }>({
 	description: '',
@@ -497,16 +503,6 @@ const updateBatchData = (): void => {
 			doc[key] = formatTime(doc[key])
 		}
 	})
-	const checkboxes: (keyof LMSBatch)[] = [
-		'published',
-		'paid_batch',
-		'allow_self_enrollment',
-		'certification',
-		'evaluation',
-	]
-	for (const key of checkboxes) {
-		;(doc as Record<string, unknown>)[key] = doc[key] ? true : false
-	}
 	originalDoc.value = structuredClone(toRaw(doc))
 }
 
@@ -605,11 +601,11 @@ const conferencingOptions = computed(() => {
 	]
 })
 
-const timezoneResource = createResource({
-	url: 'frappe.geo.country_info.get_country_timezone_info',
-	auto: true,
-	transform: (data: { all_timezones: string[] }) => data.all_timezones,
-}) as Resource<string[]>
+const timezoneResource = createResource<string[]>({
+    url: 'frappe.geo.country_info.get_country_timezone_info',
+    auto: true,
+    transform: (data: { all_timezones: string[] }) => data.all_timezones,
+})
 
 const timezoneOptions = computed(() =>
 	(timezoneResource.data || []).map((tz: string) => ({ label: tz, value: tz }))

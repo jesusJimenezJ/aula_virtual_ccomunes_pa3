@@ -69,6 +69,8 @@ export interface BatchDetails extends Omit<LMSBatch, 'instructors'> {
 	instructors: string[]
 	students?: string[]
 	batch_details_raw?: string
+
+	can_manage?: boolean
 }
 
 export interface CourseReviewInfo {

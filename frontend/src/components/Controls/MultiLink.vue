@@ -1,3 +1,4 @@
+
 <template>
 	<MultiSelect
 		v-model="value"
@@ -24,6 +25,7 @@
 				:selected="slotProps.selectedOptions"
 			/>
 		</template>
+
 		<template v-if="$slots.summary" #summary="slotProps">
 			<slot
 				name="summary"
@@ -31,12 +33,15 @@
 				:selected="slotProps.selectedOptions"
 			/>
 		</template>
+
 		<template v-if="$slots['item-prefix']" #item-prefix="slotProps">
 			<slot name="item-prefix" v-bind="slotProps" />
 		</template>
+
 		<template v-if="$slots['item-label']" #item-label="slotProps">
 			<slot name="item-label" v-bind="slotProps" />
 		</template>
+
 		<template #footer="{ clear, selectAll }">
 			<slot name="footer" :close="closePopover">
 				<div
@@ -45,11 +50,13 @@
 					<Button
 						variant="ghost"
 						size="sm"
+						class="!bg-red-50 !text-red-600 !border !border-red-200 hover:!bg-red-100 hover:!text-red-700"
 						:aria-label="__('Clear')"
 						@click="clear"
 					>
 						{{ __('Clear') }}
 					</Button>
+
 					<div
 						v-if="props.onCreate || allowSelectAll"
 						class="flex items-center gap-1"
@@ -66,6 +73,7 @@
 							</template>
 							{{ __(createLabel) }}
 						</Button>
+
 						<Button
 							v-if="allowSelectAll"
 							variant="ghost"
@@ -155,6 +163,7 @@ const props = withDefaults(
 const value = defineModel<string[]>({ default: () => [] })
 
 const popoverOpen = ref<boolean>(false)
+
 // Bound rather than left to MultiSelect, because the search runs on the server:
 // the typed text has to reach `reload()`. Binding also makes the query ours to
 // reset. See onOpen().
@@ -203,6 +212,7 @@ function onOpen(open: boolean) {
 		if (!loaded) reload()
 		return
 	}
+
 	// MultiSelect never clears a bound query, so a control reopened after a
 	// fruitless search would still be showing that search's text over that
 	// search's (empty) results. Clearing runs the base search again.
@@ -254,21 +264,25 @@ const titleLookup = createResource({
 const mergedOptions = computed<SelectOption[]>(() => {
 	const seen = new Set<string>()
 	const out: SelectOption[] = []
+
 	for (const o of options.data || []) {
 		if (seen.has(o.value)) continue
 		seen.add(o.value)
 		out.push(o)
 	}
+
 	for (const o of props.extraOptions) {
 		if (seen.has(o.value)) continue
 		seen.add(o.value)
 		out.push(o)
 	}
+
 	for (const o of resolved.value.values()) {
 		if (seen.has(o.value)) continue
 		seen.add(o.value)
 		out.push(o)
 	}
+
 	// Last resort so a selection is never invisible: show the raw docname
 	// for values the endpoint could not resolve.
 	if (!titleLookup.loading) {
@@ -278,6 +292,7 @@ const mergedOptions = computed<SelectOption[]>(() => {
 			out.push({ label: v, value: v })
 		}
 	}
+
 	return out
 })
 
@@ -287,17 +302,22 @@ function resolveMissing(vals: string[]): void {
 		...props.extraOptions.map((o) => o.value),
 		...resolved.value.keys(),
 	])
+
 	// Only fire for names we have never asked about; a name that was requested
 	// but never came back (deleted/inaccessible doc) must not re-trigger a lookup
 	// on every value change.
 	const fresh = (vals || []).filter(
 		(v) => v && !known.has(v) && !requested.has(v)
 	)
+
 	if (!fresh.length) return
+
 	fresh.forEach((v) => requested.add(v))
+
 	// Resolve everything still outstanding, not just the fresh names, so a
 	// superseded in-flight request never drops names asked for earlier.
 	const outstanding = [...requested].filter((v) => !resolved.value.has(v))
+
 	titleLookup.update({
 		params: {
 			...buildParams(''),
@@ -315,6 +335,7 @@ function resolveMissing(vals: string[]): void {
 			page_length: outstanding.length,
 		},
 	})
+
 	titleLookup.reload()
 }
 

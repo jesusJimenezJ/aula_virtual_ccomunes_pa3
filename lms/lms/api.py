@@ -81,9 +81,16 @@ def get_user_info():
 	user.is_instructor = "Course Creator" in user.roles
 	user.is_moderator = "Moderator" in user.roles
 	user.is_evaluator = "Batch Evaluator" in user.roles
-	user.is_student = not user.is_instructor and not user.is_moderator and not user.is_evaluator
-	user.is_fc_site = is_fc_site()
+	user.is_administrator = frappe.session.user == "Administrator"
 	user.is_system_manager = "System Manager" in user.roles
+	user.is_student = not (
+	    user.is_instructor
+	    or user.is_moderator
+	    or user.is_evaluator
+	    or user.is_administrator
+	    or user.is_system_manager
+	)
+	user.is_fc_site = is_fc_site()
 	user.sitename = frappe.local.site
 	user.developer_mode = frappe.conf.developer_mode
 	if user.is_fc_site and user.is_system_manager:
@@ -1154,6 +1161,18 @@ def member_roles(member: str) -> list[str]:
 	return [role for role in LMS_ROLES if role in roles]
 
 
+def require_member_management_permission():
+    """Allow member administration without granting unrelated Moderator powers."""
+    user = frappe.session.user
+    roles = frappe.get_roles(user)
+    if user == "Administrator" or "System Manager" in roles or "Moderator" in roles:
+        return
+    frappe.throw(
+        _("You do not have permission to manage members."),
+        frappe.PermissionError,
+    )
+
+
 @frappe.whitelist()
 def get_member(member: str):
 	"""One member by exact name, for the member edit form.
@@ -1162,7 +1181,7 @@ def get_member(member: str):
 	cannot answer "give me this one row": a member past the first page, or a
 	disabled one, came back empty and left the form unable to save.
 	"""
-	frappe.only_for(["Moderator"])
+	require_member_management_permission()
 
 	if not isinstance(member, str):
 		frappe.throw(_("Invalid member."), frappe.ValidationError)
@@ -1181,7 +1200,7 @@ def get_member(member: str):
 
 @frappe.whitelist()
 def get_members(start: int = 0, search: str = None, role: str = "All"):
-	frappe.only_for(["Moderator"])
+	require_member_management_permission()
 
 	lms_roles = LMS_ROLES
 	if not isinstance(role, str) or role not in (["All"] + lms_roles):
@@ -2268,7 +2287,7 @@ def get_certification_details(course: str) -> dict:
 
 @frappe.whitelist()
 def save_role(user: str, role: str, value: int):
-	frappe.only_for("Moderator")
+	require_member_management_permission()
 
 	if role not in LMS_ROLES:
 		frappe.throw(
@@ -2303,7 +2322,7 @@ def save_role(user: str, role: str, value: int):
 
 
 def save_evaluator_role(user: str, value: int):
-	frappe.only_for("Moderator")
+	require_member_management_permission()
 
 	if cint(value):
 		if not frappe.db.exists("Has Role", {"parent": user, "role": "Batch Evaluator"}):
@@ -2333,7 +2352,7 @@ def save_evaluator_role(user: str, value: int):
 
 @frappe.whitelist()
 def delete_member(user: str):
-	frappe.only_for("Moderator")
+	require_member_management_permission()
 	if not isinstance(user, str):
 		frappe.throw(_("user must be a string"))
 	if user in ("Administrator", "Guest", frappe.session.user):

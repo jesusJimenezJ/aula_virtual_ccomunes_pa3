@@ -1,5 +1,5 @@
 <template>
-	<div class="">
+	<div v-if="doc" class="course-publish-settings min-w-0 w-full">
 		<CollapsibleSection :label="__('Visibilidad')">
 			<div class="flex flex-col gap-y-4">
 				<BooleanSwitch
@@ -126,7 +126,7 @@ const selfEnrollment = computed<boolean>({
 	},
 })
 
-function setPaidCourse(val: boolean) {
+function setPaidCourse(val: number | boolean) {
 	if (!resource.doc) return
 	if (val && paymentsAppMissing.value) {
 		showPaymentsAppModal.value = true
@@ -140,3 +140,136 @@ function openPaymentsApp() {
 	openExternal('https://frappecloud.com/marketplace/apps/payments')
 }
 </script>
+
+
+<style scoped>
+.course-publish-settings {
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        color: #17324D;
+        /* token-exempt-end */
+        overflow-wrap: anywhere;
+}
+
+/* Secciones desplegables */
+.course-publish-settings :deep(details) {
+        overflow: hidden;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        border: 1px solid #D8E5F0;
+        /* token-exempt-end */
+        border-radius: 12px;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background: #FFFFFF;
+        /* token-exempt-end */
+        margin-bottom: 12px;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        box-shadow: 0 1px 3px rgb(23 50 77 / 5%);
+        /* token-exempt-end */
+}
+
+.course-publish-settings :deep(summary) {
+        min-width: 0;
+        padding: 16px;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background: #EAF4FF;
+        /* token-exempt-end */
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        color: #17324D;
+        /* token-exempt-end */
+        transition: background-color 160ms ease;
+}
+
+.course-publish-settings :deep(summary:hover) {
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background: #DFEEFC;
+        /* token-exempt-end */
+}
+
+.course-publish-settings :deep(summary > div:first-child) {
+        min-width: 0;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        color: #174F7A;
+        /* token-exempt-end */
+}
+
+.course-publish-settings :deep(summary span) {
+        overflow-wrap: anywhere;
+}
+
+.course-publish-settings :deep(details > div:last-child) {
+        min-width: 0;
+        padding: 16px;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background: #FFFFFF;
+        /* token-exempt-end */
+}
+
+/* Switches: solo los de este panel */
+.course-publish-settings :deep([role="switch"]) {
+        flex-shrink: 0;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        border-color: #B8CCDE !important;
+        /* token-exempt-end */
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background-color: #DCE7F0 !important;
+        /* token-exempt-end */
+        transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.course-publish-settings :deep([role="switch"][data-state="checked"]) {
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        border-color: #1769AA !important;
+        /* token-exempt-end */
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        background-color: #1769AA !important;
+        /* token-exempt-end */
+}
+
+.course-publish-settings :deep([role="switch"]:focus-visible) {
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        outline: 2px solid #247DBB;
+        /* token-exempt-end */
+        outline-offset: 3px;
+}
+
+.course-publish-settings :deep([role="switch"]:disabled) {
+        opacity: 0.55;
+}
+
+/* Campos y controles del panel */
+.course-publish-settings :deep(input),
+.course-publish-settings :deep(textarea),
+.course-publish-settings :deep(select) {
+        max-width: 100%;
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        border-color: #C9D9E7;
+        /* token-exempt-end */
+        border-radius: 8px;
+}
+
+.course-publish-settings :deep(input:focus),
+.course-publish-settings :deep(textarea:focus),
+.course-publish-settings :deep(select:focus) {
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        border-color: #247DBB;
+        /* token-exempt-end */
+        /* token-exempt-start: color literal original del diseño; conservar sin alterar */
+        outline-color: #247DBB;
+        /* token-exempt-end */
+}
+
+/* Evitar que los textos largos empujen el panel */
+.course-publish-settings :deep(label),
+.course-publish-settings :deep(p) {
+        overflow-wrap: anywhere;
+}
+
+@media (max-width: 767px) {
+        .course-publish-settings :deep(summary) {
+                padding: 14px;
+        }
+
+        .course-publish-settings :deep(details > div:last-child) {
+                padding: 14px;
+        }
+}
+</style>

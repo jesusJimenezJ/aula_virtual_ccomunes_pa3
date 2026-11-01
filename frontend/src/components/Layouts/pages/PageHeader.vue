@@ -27,25 +27,7 @@
 		</div>
 
 		<div class="flex shrink-0 items-center gap-2">
-			<button
-				type="button"
-				class="theme-toggle"
-				:aria-label="
-					theme === 'dark' ? __('Activar modo día') : __('Activar modo noche')
-				"
-				:title="theme === 'dark' ? __('Modo día') : __('Modo noche')"
-				@click="toggleTheme"
-			>
-				<span class="theme-toggle-icon" aria-hidden="true">
-					{{ theme === 'dark' ? '☀' : '☾' }}
-				</span>
-
-				<span class="theme-toggle-label">
-					{{ theme === 'dark' ? __('Modo día') : __('Modo noche') }}
-				</span>
-			</button>
-
-			<slot name="actions" />
+<slot name="actions" />
 		</div>
 	</header>
 </template>
@@ -56,7 +38,6 @@ import type { RouteLocationRaw } from 'vue-router'
 import { Badge, Breadcrumbs } from 'frappe-ui'
 import SkeletonLoader from '@/components/SkeletonLoader.vue'
 import { useScreenSize } from '@/utils/composables'
-import { setThemePreference, theme } from '@/utils/theme'
 import type { Breadcrumb } from '@/types'
 
 const props = withDefaults(
@@ -73,9 +54,6 @@ const props = withDefaults(
 
 const { isMobile } = useScreenSize()
 
-function toggleTheme() {
-	setThemePreference(theme.value === 'dark' ? 'light' : 'dark')
-}
 
 const currentLabel = computed<string>(
 	() => props.breadcrumbs[props.breadcrumbs.length - 1]?.label ?? ''

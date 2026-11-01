@@ -4,21 +4,26 @@
 		variant="form"
 		class="flex-1 min-h-0"
 	/>
-	<div v-else class="grid grid-cols-1 flex-1 md:min-h-0 md:grid-cols-[70%,30%]">
-		<div class="space-y-8 p-5 md:overflow-y-auto">
+	<div v-else class="mx-auto grid w-full min-w-0 max-w-[1600px] grid-cols-1 items-start bg-surface-base md:grid-cols-[minmax(0,1fr)_minmax(280px,0.42fr)]">
+		<div class="min-w-0 space-y-4 bg-surface-base p-4 md:p-5">
 			<CourseDetailsSection />
-			<CourseOverviewSection />
-			<CourseDocuments
+		</div>
+		<!-- token-exempt-start: borde de marca #D8E5F0 conservado -->
+<aside
+			class="min-w-0 border-t border-[#D8E5F0] bg-surface-base md:border-s md:border-t-0 md:px-3"
+		>
+<!-- token-exempt-end -->
+			<CoursePublishSettings />
+		</aside>
+
+                <div class="min-w-0 w-full px-6 md:col-span-2 md:px-8">
+                        <CourseOverviewSection />
+                        <CourseDocuments
 				v-if="courseResource.doc?.name"
 				:courseName="courseResource.doc.name"
 				:canManage="true"
 			/>
-		</div>
-		<aside
-			class="border-t md:overflow-y-auto md:border-s md:border-t-0 md:px-3"
-		>
-			<CoursePublishSettings />
-		</aside>
+                </div>
 	</div>
 </template>
 

@@ -1,5 +1,6 @@
+
 <template>
-	<div class="py-2">
+	<div class="ccomunes-user-header">
 		<SidebarHeader
 			:title="appName"
 			:subtitle="
@@ -18,7 +19,14 @@
 			</template>
 		</SidebarHeader>
 	</div>
-	<SettingsModal v-if="userResource.data?.is_moderator" />
+
+	<SettingsModal
+        v-if="
+            userResource.data?.is_moderator ||
+            userResource.data?.is_system_manager ||
+            userResource.data?.is_administrator
+        "
+    />
 </template>
 
 <script setup>
@@ -26,7 +34,6 @@ import { sessionStore } from '@/stores/session'
 import { call, createResource, SidebarHeader, toast } from 'frappe-ui'
 import { useRouter } from 'vue-router'
 import { convertToTitleCase } from '@/utils'
-import { setThemePreference, themePreference } from '@/utils/theme'
 import { usersStore } from '@/stores/user'
 import { useSettings } from '@/stores/settings'
 import { h, computed } from 'vue'
@@ -40,9 +47,10 @@ import { pushSettingsHash } from '@/composables/useSettingsHash'
 
 const router = useRouter()
 const { logout, branding } = sessionStore()
-let { userResource } = usersStore()
+const { userResource } = usersStore()
 const settingsStore = useSettings()
-let { isLoggedIn } = sessionStore()
+const { isLoggedIn } = sessionStore()
+
 const frappeCloudBaseEndpoint = 'https://frappecloud.com'
 const $dialog = createDialog
 
@@ -52,25 +60,13 @@ const appName = computed(() =>
 		: 'Ccomunes'
 )
 
-// SidebarHeader passes no slots through to its Dropdown, so the check that
-// marks the current theme rides on each option instead.
-const themeCheck = {
-	suffix: ({ selected }) =>
-		selected
-			? h('span', {
-					class: 'lucide-check size-4 text-ink-gray-7',
-					'aria-hidden': 'true',
-			  })
-			: null,
-}
 
 function isSystemUser() {
 	const cookies = new URLSearchParams(document.cookie.split('; ').join('&'))
 	return cookies.get('system_user') === 'yes'
 }
 
-// Only system users see the Apps menu, and with `block_endpoints` on a website
-// user gets a 403 from this endpoint, so don't fetch it for them at all.
+// Solo los usuarios del sistema consultan las aplicaciones disponibles.
 const apps = createResource({
 	url: 'frappe.apps.get_apps',
 	cache: 'apps',
@@ -106,9 +102,6 @@ const appMenuItems = computed(() => {
 		},
 		slots: {
 			prefix: () =>
-				// alt="" deliberately: the row's own label names the app, and a
-				// second announcement of it would only repeat. Without it a screen
-				// reader falls back to reading the logo's filename.
 				h('img', {
 					class: 'size-4 shrink-0 rounded-4',
 					src: app.logo,
@@ -134,33 +127,6 @@ const userDropdownOptions = computed(() => {
 					},
 				},
 				{
-					icon: 'lucide-sun-moon',
-					label: __('Theme'),
-					submenu: [
-						{
-							icon: 'lucide-sun',
-							label: __('Light'),
-							selected: themePreference.value === 'light',
-							slots: themeCheck,
-							onClick: () => setThemePreference('light'),
-						},
-						{
-							icon: 'lucide-moon',
-							label: __('Dark'),
-							selected: themePreference.value === 'dark',
-							slots: themeCheck,
-							onClick: () => setThemePreference('dark'),
-						},
-						{
-							icon: 'lucide-monitor',
-							label: __('System'),
-							selected: themePreference.value === 'system',
-							slots: themeCheck,
-							onClick: () => setThemePreference('system'),
-						},
-					],
-				},
-				{
 					icon: 'lucide-layout-grid',
 					label: __('Apps'),
 					submenu: appMenuItems.value,
@@ -173,7 +139,11 @@ const userDropdownOptions = computed(() => {
 						pushSettingsHash(router)
 					},
 					condition: () => {
-						return userResource.data?.is_moderator
+						return (
+                userResource.data?.is_moderator ||
+                userResource.data?.is_system_manager ||
+                userResource.data?.is_administrator
+            )
 					},
 				},
 				{
@@ -264,7 +234,7 @@ const userDropdownOptions = computed(() => {
 })
 
 const loginToFrappeCloud = () => {
-	let redirect_to = '/dashboard/sites/' + userResource.data.sitename
+	const redirect_to = '/dashboard/sites/' + userResource.data.sitename
 	openExternal(`${frappeCloudBaseEndpoint}${redirect_to}`)
 }
 
@@ -300,3 +270,26 @@ const clearDemoData = () => {
 		})
 }
 </script>
+
+<style scoped>
+.ccomunes-user-header {
+	padding: 0.65rem 0.55rem;
+	/* token-exempt-start: color literal original del diseño; conservar sin alterar */
+	border-bottom: 1px solid #29415b;
+	/* token-exempt-end */
+	/* token-exempt-start: color literal original del diseño; conservar sin alterar */
+	color: #ffffff;
+	/* token-exempt-end */
+}
+
+/* Colores del encabezado y del texto del usuario */
+.ccomunes-user-header :deep(*) {
+	color: inherit;
+}
+
+.ccomunes-user-header :deep(button:hover) {
+	/* token-exempt-start: color literal original del diseño; conservar sin alterar */
+	background: #193957;
+	/* token-exempt-end */
+}
+</style>

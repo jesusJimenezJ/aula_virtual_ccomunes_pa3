@@ -7,7 +7,7 @@
 		>
 			{{ __('Skip to main content') }}
 		</a>
-		<div class="h-full border-e bg-surface-sidebar">
+		<div class="ccomunes-sidebar-shell h-full border-e bg-surface-sidebar">
 			<AppSidebar />
 		</div>
 		<main

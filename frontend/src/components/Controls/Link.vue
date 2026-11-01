@@ -1,3 +1,4 @@
+
 <template>
 	<div :class="attrs.class as any" :style="attrs.style as any">
 		<Combobox
@@ -35,6 +36,7 @@
 						>
 							<span class="lucide-arrow-left size-4" />
 						</button>
+
 						<FormControl
 							v-model="newItemName"
 							class="flex-1 min-w-0"
@@ -42,9 +44,11 @@
 							:placeholder="__(props.inlineCreatePlaceholder)"
 							@keyup.enter="submitCreate"
 						/>
+
 						<Button
 							variant="solid"
 							size="sm"
+							class="!bg-blue-600 !text-white hover:!bg-blue-700"
 							:disabled="!newItemName.trim()"
 							:aria-label="__('Create')"
 							@click="submitCreate"
@@ -52,19 +56,23 @@
 							{{ __('Create') }}
 						</Button>
 					</div>
+
 					<div v-else class="flex flex-wrap justify-between gap-2">
 						<Button
 							variant="ghost"
 							size="sm"
+							class="!bg-red-50 !text-red-600 !border !border-red-200 hover:!bg-red-100 hover:!text-red-700"
 							:aria-label="__('Clear')"
 							@click="clearValue"
 						>
 							{{ __('Clear') }}
 						</Button>
+
 						<Button
 							v-if="props.onCreate"
-							variant="ghost"
+							variant="solid"
 							size="sm"
+							class="!bg-blue-600 !text-white hover:!bg-blue-700"
 							:aria-label="__('Create New')"
 							@click="handleCreate"
 						>
