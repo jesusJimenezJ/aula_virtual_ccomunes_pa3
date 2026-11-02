@@ -10,6 +10,8 @@ const paymentName = computed(() => String(route.params.paymentName || ''))
 const operationNumber = ref('')
 const receiptUrl = ref('')
 const sending = ref(false)
+const error = ref('')
+const success = ref('')
 
 const payment = createResource({
     url: 'lms.lms.yape.get_yape_payment',

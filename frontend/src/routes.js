@@ -1,3 +1,4 @@
+
 // The route table lives in its own module, separate from router.js, so it can
 // be imported without pulling in frappe-ui or the pinia stores that router.js
 // wires up around it (the beforeEach guard, the persona check). That keeps
@@ -17,7 +18,7 @@ export const routes = [
 		// Both children are static segments, so vue-router scores them above
 		// the sibling '/courses/:courseName' and they win. The trade: a course
 		// whose docname is literally `new` or `import` becomes unreachable.
-		// Accepted and documented in the design â€” it is the same trade the app
+		// Accepted and documented in the design — it is the same trade the app
 		// already makes for '/batches/details/:batchName'. Deliberately not
 		// guarded.
 		children: [
@@ -142,18 +143,18 @@ export const routes = [
 			},
 		],
 	},
-	        {
-                path: '/yape-payment/:paymentName',
-                name: 'YapePayment',
-                component: () => import('@/pages/YapePayment.vue'),
-                props: true,
-        },
-        {
-                path: '/billing/:type/:name',
-                name: 'Billing',
-                component: () => import('@/pages/Billing.vue'),
-                props: true,
-        },
+	{
+		path: '/yape-payment/:paymentName',
+		name: 'YapePayment',
+		component: () => import('@/pages/YapePayment.vue'),
+		props: true,
+	},
+	{
+		path: '/billing/:type/:name',
+		name: 'Billing',
+		component: () => import('@/pages/Billing.vue'),
+		props: true,
+	},
 	{
 		path: '/statistics',
 		name: 'Statistics',
@@ -298,7 +299,7 @@ export const routes = [
 				// `/edit` is mandatory, not stylistic. A bare `:programName` child
 				// would produce a path byte-identical to the sibling ProgramDetail
 				// route below with the same match score; vue-router keeps both and
-				// serves whichever was registered first â€” this one â€” which would
+				// serves whichever was registered first — this one — which would
 				// silently break every student-facing program link.
 				path: ':programName/edit',
 				name: 'ProgramForm',
@@ -458,8 +459,8 @@ export const routes = [
 		component: () => import('@/pages/DataImport.vue'),
 		props: true,
 	},
-	// The You tab. Only the phone layout offers it â€” the desk sidebar already
-	// shows everything on it â€” but it is an ordinary route, so it answers a cold
+	// The You tab. Only the phone layout offers it — the desk sidebar already
+	// shows everything on it — but it is an ordinary route, so it answers a cold
 	// deep link with no bar mounted the same way it answers a tap.
 	{
 		path: '/you',
@@ -468,7 +469,7 @@ export const routes = [
 	},
 	// The only thing under '/settings' with an address. Settings itself is the
 	// desktop dialog, which floats over whatever page the URL points at and has
-	// no route of its own â€” an LMS is not configured with a thumb, so there are
+	// no route of its own — an LMS is not configured with a thumb, so there are
 	// no phone settings pages for this to sit beside any more.
 	//
 	// The path is kept because it reads correctly and Members.vue opens the form
